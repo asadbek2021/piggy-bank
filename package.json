@@ -2,9 +2,10 @@
   "name": "piggy-bank",
   "version": "1.0.0",
   "description": "Web application for Exadel Internship project. It is kinda online bank",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/asadbek2021/piggy-bank/issues"
   },
-  "homepage": "https://github.com/asadbek2021/piggy-bank#readme"
+  "homepage": "https://github.com/asadbek2021/piggy-bank#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
