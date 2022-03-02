@@ -41,6 +41,7 @@ router.delete('/:id',(req,res)=>{
     }
     users.splice(index,1)
     res.status(204)
+    res.redirect('/user')
 })
 
 module.exports = router
