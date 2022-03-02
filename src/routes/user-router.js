@@ -7,17 +7,18 @@ const users = [
 ]
 
 router.get('/',(req,res)=>{
-    res.status(200).json(users)
+    res.render('users/user',{
+        users
+    })
 })
 
-router.post('/:id',(req,res)=>{
-    console.log(req.params.id);
+router.post('/',(req,res)=>{
     users.push(req.body)
     res.status(200).json({message: 'User was succesfully added!'})
 })
 
 // update
-router.put('/update/:id',(req,res)=>{
+router.put('/:id',(req,res)=>{
     let index = users.findIndex(c=> c.id == req.params.id)
     const {name,age} = req.body
     if(index==-1){
