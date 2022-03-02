@@ -33,14 +33,14 @@ router.put('/update/:id',(req,res)=>{
 })
 
 // delete
-router.get('/delete/:id',(req,res)=>{
+router.delete('/:id',(req,res)=>{
     let index = users.findIndex(c=> c.id == req.params.id)
     if(index==-1){
         res.status(404).json({message: `User with id: ${req.params.id} cannot be found!`})
         return
     }
     users.splice(index,1)
-    res.status(200).json({message: 'User was successfully deleted!'})
+    res.status(204)
 })
 
 module.exports = router
