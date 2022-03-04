@@ -1,3 +1,4 @@
+require('dotenv').config({path:'../.env'})
 const express = require('express')
 const app = express();
 const path = require('path')
@@ -22,8 +23,8 @@ app.use(express.json())
 app.use(logger)
 
 
-app.use('/user',require('./routes/user-router'))
-app.use('/',require('./routes/home'))
+app.use('/user',require('./routes/account.router'))
+app.use('/',require('./routes/home.router'))
 
 app.use(errorHandler)
 
