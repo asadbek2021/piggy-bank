@@ -1,10 +1,16 @@
 const {Router} = require('express')
 const router = Router();
+const httpError = require('../tools/httpError')
+
 const users = [
     {name: 'John',age:23,id: 1},
     {name: 'Alex',age:34, id :2},
     {name: 'Billy',age:30, id:3},
 ]
+
+
+
+
 
 router.get('/',(req,res)=>{
     res.render('users/user',{
@@ -12,10 +18,24 @@ router.get('/',(req,res)=>{
     })
 })
 
+
+// get user by id
+router.get('/:id',(req,res)=>{
+    const user = users.find(c=> c.id === +req.params.id)
+    if(!user){
+        throw new httpError( `There is no user with the id ${req.params.id} `,404)
+    }
+    res.render('users/getByid',{
+        user
+    })
+})
+
+
 router.post('/',(req,res)=>{
     users.push(req.body)
     res.status(200).json({message: 'User was succesfully added!'})
 })
+
 
 // update
 router.put('/:id',(req,res)=>{

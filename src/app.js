@@ -1,8 +1,9 @@
 const express = require('express')
 const app = express();
-const logger = require('./tools/Logger')
-const exhbs = require('express-handlebars')
 const path = require('path')
+const exhbs = require('express-handlebars')
+const logger = require('./tools/Logger')
+const errorHandler = require('./tools/ErrorHandler')
 
 const hbs = exhbs.create({
     defaultLayout: 'main.hbs',
@@ -21,9 +22,9 @@ app.use(express.json())
 app.use(logger)
 
 
-
 app.use('/user',require('./routes/user-router'))
 app.use('/',require('./routes/home'))
 
+app.use(errorHandler)
 
 module.exports = app
