@@ -1,9 +1,9 @@
 const app = require('./app')
+const config = require('./config/config')
 
 
 
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT,()=>{
+app.listen(config.PORT || 3000,()=>{
     console.log(`Sever is running!`);
 })
