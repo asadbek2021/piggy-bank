@@ -10,6 +10,11 @@
     "parserOptions": {
         "ecmaVersion": "latest"
     },
+    "plugins": [
+        "eslint-plugin-import",
+        "eslint-plugin-node",
+        "eslint-plugin-prettier"
+    ],
     "rules": {
         "linebreak-style":"off",
         "no-console":"off"

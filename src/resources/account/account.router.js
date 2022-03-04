@@ -6,9 +6,15 @@ const HttpError = require('../../tools/httpError');
 const {} = require('./account.service');
 
 const users = [
-  { name: 'John', age: 23, id: 1 },
-  { name: 'Alex', age: 34, id: 2 },
-  { name: 'Billy', age: 30, id: 3 },
+  {
+    name: 'John', email: 23, password: 1, id: 1,
+  },
+  {
+    name: 'Alex', email: 23, password: 1, id: 2,
+  },
+  {
+    name: 'Jolly', email: 23, password: 1, id: 3,
+  },
 ];
 
 router.get('/', (req, res) => {
