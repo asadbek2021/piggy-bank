@@ -3,10 +3,10 @@
 
 ## Setup
 
-    First of all clone this repository:
+First of all clone this repository:
      ``git clone https://github.com/asadbek2021/piggy-bank.git``
     
-    Then go to the folder and checkout to another branch: 
+Then go to the folder and checkout to another branch: 
     ``cd ./piggy-bank`` and ``git checkout simple-rest-api``
 
 1. Install all dependencies 
