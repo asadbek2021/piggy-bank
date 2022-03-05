@@ -9,6 +9,7 @@ const accountRouter = require('./resources/account/account.router');
 const expenseRouter = require('./resources/expense/expense.router');
 const incomeRouter = require('./resources/income/income.router');
 const statisticRouter = require('./resources/statistic/statistic.router');
+const categoryRouter = require('./resources/category/category.router');
 
 const hbs = exhbs.create({
   defaultLayout: 'main.hbs',
@@ -30,6 +31,7 @@ app.use('/user', accountRouter);
 app.use('/expense', expenseRouter);
 app.use('/income', incomeRouter);
 app.use('/statistic', statisticRouter);
+app.use('/category', categoryRouter);
 app.use('/', require('./resources/home.router'));
 
 app.use(errorHandler);
