@@ -18,6 +18,7 @@ const categoryRouter = require('./resources/category/category.router');
 const authRouter = require('./resources/auth/auth.router');
 const db = require('./loader/dbconnect');
 
+const auth = passport.authenticate('jwt', { session: false });
 const hbs = exhbs.create({
   defaultLayout: 'main.hbs',
   extname: 'hbs',
@@ -41,15 +42,14 @@ const opts = {
   secretOrKey: config.JWT_SECRET,
 };
 passport.use(new Strategy(opts, db.jwtCallback));
-const auth = passport.authenticate('jwt', { session: false });
 
 app.use('/user', auth, accountRouter);
-app.use('/expense', expenseRouter);
-app.use('/income', incomeRouter);
-app.use('/statistic', statisticRouter);
-app.use('/category', categoryRouter);
+app.use('/expense', auth, expenseRouter);
+app.use('/income', auth, incomeRouter);
+app.use('/statistic', auth, statisticRouter);
+app.use('/category', auth, categoryRouter);
 app.use('/auth', authRouter);
-app.use('/', require('./resources/home.router'));
+app.use('/', auth, require('./resources/home.router'));
 
 app.use(errorHandler);
 
