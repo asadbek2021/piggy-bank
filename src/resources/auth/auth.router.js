@@ -3,7 +3,7 @@ const { Router } = require('express');
 const router = Router();
 
 router.get('/', (req, res) => {
-  res.render('hello');
+  res.render('auth/auth');
 });
 
 module.exports = router;

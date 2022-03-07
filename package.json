@@ -1,5 +1,5 @@
 {
-  "name": "piggy-bank",
+  "name": "budgetify",
   "version": "1.0.0",
   "description": "Web application for Exadel Internship project. It is kinda online bank",
   "main": "server.js",
@@ -13,7 +13,7 @@
     "url": "git+https://github.com/asadbek2021/piggy-bank.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Asadbek",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/asadbek2021/piggy-bank/issues"
