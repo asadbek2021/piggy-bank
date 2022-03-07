@@ -1,4 +1,4 @@
-# piggy-bank
+# Budgetify
 
 
 ## Setup
