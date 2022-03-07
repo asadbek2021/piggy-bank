@@ -5,17 +5,9 @@ const HttpError = require('../../tools/httpError');
 // eslint-disable-next-line no-empty-pattern
 const {} = require('./account.service');
 
-const users = [
-  {
-    name: 'John', email: 23, password: 1, id: 1,
-  },
-  {
-    name: 'Alex', email: 23, password: 1, id: 2,
-  },
-  {
-    name: 'Jolly', email: 23, password: 1, id: 3,
-  },
-];
+const db = require('../../loader/dbconnect');
+
+const { users } = db;
 
 router.get('/', (req, res) => {
   res.render('users/user', {
