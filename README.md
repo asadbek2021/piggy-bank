@@ -1,4 +1,4 @@
-# piggy-bank
+# Budgetify
 
 
 ## Setup
@@ -25,3 +25,5 @@ Then go to the folder and checkout to another branch:
   - ``POST`` - ``/user`` create new user;
   - ``PUT`` - ``/user/id`` update user;
   - ``DELETE`` - ``/user/id`` delete user;
+  - ``POST`` - ``/auth/login`` login;
+  - ``POST`` - ``/auth/register`` register;
