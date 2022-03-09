@@ -1,52 +1,65 @@
-const db = require('../../loader/dbconnect');
-const HttpError = require('../../tools/httpError');
-
-const { users } = db;
+const { accounts } = require('../../loader/dbconnect');
 
 async function createAccount(req, res) {
-  users.push(req.body);
-  res.status(200).json({ message: 'User was succesfully added!' });
-}
+  const {
+    userId,
+    title,
+    description,
+    category,
+    currency,
+    availableAmount,
+  } = req.body;
+  const created = new Date().getTime();
+  const updated = null;
 
-async function updateAccount(req, res) {
-  const index = users.findIndex((c) => c.id === +req.params.id);
-  const { name, age } = req.body;
-  if (index === -1) {
-    res.status(404).json({ message: `User with id: ${req.params.id} cannot be found!` });
-    return;
-  }
-  users[index] = {
-    id: req.params.id,
-    name,
-    age,
+  const account = {
+    userId,
+    title,
+    description,
+    category,
+    currency,
+    availableAmount,
+    created,
+    updated,
   };
-  res.status(200).json(users[index]);
+  accounts.push(account);
+  res.status(201).json(accounts);
 }
-
+async function updateAccount(req, res) {
+  const {
+    userId,
+    title,
+    description,
+    category,
+    currency,
+    availableAmount,
+    created,
+  } = req.body;
+  const updated = new Date().getTime();
+  const newaccount = {
+    userId,
+    title,
+    description,
+    category,
+    currency,
+    availableAmount,
+    created,
+    updated,
+  };
+  accounts.push(newaccount);
+  res.status(201).json(accounts);
+}
 async function deleteAccount(req, res) {
-  const index = users.findIndex((c) => c.id === +req.params.id);
-  if (index === -1) {
-    res.status(404).json({ message: `User with id: ${req.params.id} cannot be found!` });
-    return;
-  }
-  users.splice(index, 1);
-  res.status(204);
-  res.redirect('/user');
+  const { id } = req.params;
+  const idx = accounts.findIndex((c) => c.id === id);
+  accounts.slice(idx, 1);
+  res.status(204).redirect('/account');
 }
 
 async function getAccountById(req, res) {
-  const user = users.find((c) => c.id === +req.params.id);
-  if (!user) {
-    throw new HttpError(`There is no user with the id ${req.params.id} `, 404);
-  }
-  res.render('users/getByid', {
-    user,
-  });
-}
-async function getAccounts(req, res) {
-  res.render('users/user', {
-    users,
-  });
+  const { id } = req.params;
+  const account = accounts.find((c) => c.id === id);
+  res.json(account);
 }
 
 module.exports = {
@@ -54,5 +67,4 @@ module.exports = {
   updateAccount,
   deleteAccount,
   getAccountById,
-  getAccounts,
 };

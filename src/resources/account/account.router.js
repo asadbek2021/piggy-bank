@@ -1,15 +1,13 @@
 const { Router } = require('express');
-
-const router = Router();
-
-// eslint-disable-next-line no-empty-pattern
 const {
-  createAccount, updateAccount, deleteAccount, getAccountById, getAccounts,
+  createAccount, deleteAccount, getAccountById, updateAccount,
 } = require('./account.service');
 
-router.get('/', getAccounts);
+const router = Router();
+// eslint-disable-next-line no-unused-vars
+const httpError = require('../../tools/httpError');
+// eslint-disable-next-line no-empty-pattern
 
-// get user by id
 router.get('/:id', getAccountById);
 
 router.post('/', createAccount);

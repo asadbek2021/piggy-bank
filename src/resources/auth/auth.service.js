@@ -73,7 +73,12 @@ async function loginUser(req, res, next) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
+async function logoutUser(req, res) {
+  // some actoin
+}
 module.exports = {
   registerUser,
   loginUser,
+  logoutUser,
 };

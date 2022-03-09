@@ -9,9 +9,9 @@ const { Strategy, ExtractJwt } = require('passport-jwt');
 const logger = require('./tools/Logger');
 const config = require('./config/config');
 const errorHandler = require('./tools/ErrorHandler');
+const userRouter = require('./resources/user/user.router');
+const transactionRouter = require('./resources/transaction/transaction.router');
 const accountRouter = require('./resources/account/account.router');
-const expenseRouter = require('./resources/transaction/transaction.router');
-const incomeRouter = require('./resources/income/income.router');
 const statisticRouter = require('./resources/statistic/statistic.router');
 const categoryRouter = require('./resources/category/category.router');
 const authRouter = require('./resources/auth/auth.router');
@@ -42,9 +42,9 @@ const opts = {
 };
 passport.use(new Strategy(opts, jwtCallback));
 
-app.use('/user', auth, accountRouter);
-app.use('/expense', auth, expenseRouter);
-app.use('/income', auth, incomeRouter);
+app.use('/user', auth, userRouter);
+app.use('/transaction', auth, transactionRouter);
+app.use('/account', auth, accountRouter);
 app.use('/statistic', auth, statisticRouter);
 app.use('/category', auth, categoryRouter);
 app.use('/auth', authRouter);
