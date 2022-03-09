@@ -4,7 +4,7 @@ const router = Router();
 // eslint-disable-next-line no-unused-vars
 const httpError = require('../../tools/httpError');
 // eslint-disable-next-line no-empty-pattern
-const {} = require('./expense.service');
+const {} = require('./transaction.service');
 
 router.get('/', (req, res) => {
   res.json({ message: 'Get all expenses' });
