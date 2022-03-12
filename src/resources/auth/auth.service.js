@@ -45,7 +45,6 @@ async function loginUser(req, res, next) {
     if (!errors.isEmpty()) {
       throw new HttpError('Registration error', 403, errors);
     }
-    console.log('REQ BODY', req.body);
     const { email, password } = req.body;
     const user = login(email, password);
     if (user) {
@@ -73,12 +72,7 @@ async function loginUser(req, res, next) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-async function logoutUser(req, res) {
-  // some actoin
-}
 module.exports = {
   registerUser,
   loginUser,
-  logoutUser,
 };

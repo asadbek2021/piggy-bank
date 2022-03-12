@@ -1,17 +1,34 @@
 const bcrypt = require('bcrypt');
+const uuid = require('uuid').v4;
+
 const { users } = require('../../loader/dbconnect');
-// const HttpError = require('../../tools/httpError');
 
 function getUserByEmail(email) {
   return users.find((c) => c.email === email);
 }
 
 function register(user) {
+  const {
+    email,
+    role,
+    firstname,
+    lastname,
+    gender,
+    birthday,
+    residence,
+    password,
+  } = user;
+
   users.push({
-    id: Math.random(),
-    email: user.email,
-    password: bcrypt.hashSync(user.password, 10),
-    role: user.role,
+    id: uuid(),
+    email,
+    role,
+    firstname,
+    lastname,
+    gender,
+    birthday,
+    residence,
+    password: bcrypt.hashSync(password, 10),
   });
 }
 function login(email, password) {
