@@ -16,6 +16,7 @@ const statisticRouter = require('./resources/statistic/statistic.router');
 const categoryRouter = require('./resources/category/category.router');
 const authRouter = require('./resources/auth/auth.router');
 const { jwtCallback } = require('./resources/auth/auth.repository');
+const addGuard = require('./tools/guards');
 
 const auth = passport.authenticate('jwt', { session: false });
 const hbs = exhbs.create({
@@ -42,10 +43,10 @@ const opts = {
 };
 passport.use(new Strategy(opts, jwtCallback));
 
-app.use('/user', auth, userRouter);
+app.use('/user', auth, addGuard, userRouter);
 app.use('/transaction', auth, transactionRouter);
 app.use('/account', auth, accountRouter);
-app.use('/statistic', auth, statisticRouter);
+app.use('/statistic', auth, addGuard, statisticRouter);
 app.use('/category', auth, categoryRouter);
 app.use('/auth', authRouter);
 app.use('/', require('./resources/home.router'));
