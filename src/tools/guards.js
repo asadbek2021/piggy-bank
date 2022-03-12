@@ -2,7 +2,6 @@ const db = require('../loader/dbconnect');
 
 const addGuard = function guard(req, res, next) {
   const user = db.getUserByEmail(req.user.email);
-  console.log(user);
   if (user?.role === 'ADMIN') {
     return next();
   }
