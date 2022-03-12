@@ -1,3 +1,4 @@
+const uuid = require('uuid').v4;
 const { accounts } = require('../../loader/dbconnect');
 
 async function createAccount(req, res) {
@@ -13,6 +14,7 @@ async function createAccount(req, res) {
   const updated = null;
 
   const account = {
+    id: uuid(),
     userId,
     title,
     description,
@@ -27,6 +29,7 @@ async function createAccount(req, res) {
 }
 async function updateAccount(req, res) {
   const {
+    id,
     userId,
     title,
     description,
@@ -37,6 +40,7 @@ async function updateAccount(req, res) {
   } = req.body;
   const updated = new Date().getTime();
   const newaccount = {
+    id,
     userId,
     title,
     description,

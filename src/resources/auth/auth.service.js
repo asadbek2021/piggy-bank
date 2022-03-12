@@ -45,7 +45,6 @@ async function loginUser(req, res, next) {
     if (!errors.isEmpty()) {
       throw new HttpError('Registration error', 403, errors);
     }
-    console.log('REQ BODY', req.body);
     const { email, password } = req.body;
     const user = login(email, password);
     if (user) {
