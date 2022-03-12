@@ -6,7 +6,7 @@ const exhbs = require('express-handlebars');
 const cors = require('cors');
 const passport = require('passport');
 const { Strategy, ExtractJwt } = require('passport-jwt');
-const logger = require('./tools/Logger');
+const { Logger } = require('./tools/Logger');
 const config = require('./config/config');
 const errorHandler = require('./tools/ErrorHandler');
 const userRouter = require('./resources/user/user.router');
@@ -35,7 +35,7 @@ app.use(express.static('./public'));
 app.use(express.json());
 app.use(cors());
 app.use(passport.initialize());
-app.use(logger);
+app.use(Logger);
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
