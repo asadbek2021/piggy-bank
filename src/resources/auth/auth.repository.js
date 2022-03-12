@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const { users } = require('../../loader/dbconnect');
-// const HttpError = require('../../tools/httpError');
 
 function getUserByEmail(email) {
   return users.find((c) => c.email === email);
