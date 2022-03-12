@@ -39,9 +39,7 @@ async function getUserById(req, res) {
   });
 }
 async function getUsers(req, res) {
-  res.render('users/user', {
-    users,
-  });
+  res.json(users);
 }
 
 module.exports = {
