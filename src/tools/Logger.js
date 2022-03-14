@@ -26,7 +26,6 @@ const logger = createLogger({
 const Logger = function Logger(req, res, next) {
   logger.info(`REQUEST | method: ${req.method},  URL: ${req.url}`);
   logger.info(`RESPONSE | Status: ${res.statusCode}`);
-  console.log(res.body);
   next();
 };
 

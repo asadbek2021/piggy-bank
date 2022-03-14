@@ -1,7 +1,5 @@
-const db = require('../../loader/dbconnect');
 const HttpError = require('../../tools/httpError');
-
-const { users } = db;
+const { users } = require('../../loader/db.loader');
 
 async function updateUser(req, res) {
   const index = users.findIndex((c) => c.id === +req.params.id);

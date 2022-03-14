@@ -1,5 +1,5 @@
 const uuid = require('uuid').v4;
-const { accounts } = require('../../loader/dbconnect');
+const { accounts } = require('../../loader/db.loader');
 
 async function createAccount(req, res) {
   const {
