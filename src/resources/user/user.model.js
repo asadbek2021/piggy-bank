@@ -42,4 +42,31 @@ const userSchema = new Schema({
 
 }, { timestamps: true });
 
+userSchema.methods.sayHi = function greet() {
+  console.log(`Hi, I'm ${this.firstname}`);
+};
+
+userSchema.statics.findByEmail = function findByEmail(email) {
+  return this.where({ email: new RegExp(email, 'i') }).exec();
+};
+
+userSchema.query.byName = function byName(name) {
+  return this.where({ firstname: new RegExp(name, 'i') });
+};
+
+userSchema.virtual('fullname').get(function getFullname() {
+  return `${this.firstname} ${this.lastname}`;
+}).set(function setFullname(fullname) {
+  const [firstname, lastname] = fullname.split(' ');
+  this.firstname = firstname;
+  this.lastname = lastname;
+});
+
+// userSchema.pre('save', function(next) {
+//   if (this.isModified('password')) {
+//     this.password = this.hashPassword(this.password);
+//   }
+//   next();
+// });
+
 module.exports = model('User', userSchema);

@@ -5,7 +5,7 @@ const addGuard = async function guard(req, res, next) {
   if (user?.role === 'ADMIN') {
     return next();
   }
-  return res.json({ message: 'You are not allowed' });
+  return res.status(403).json({ message: 'You are not allowed' });
 };
 
 module.exports = addGuard;

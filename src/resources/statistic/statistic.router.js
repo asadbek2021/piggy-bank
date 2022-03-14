@@ -1,13 +1,8 @@
 const { Router } = require('express');
+const { getAllStatistics } = require('./statistics.service');
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.json({ message: 'Get all statistics' });
-});
-
-router.get('/:id', (req, res) => {
-  res.json({ message: 'Get statistics by id' });
-});
+router.get('/', getAllStatistics);
 
 module.exports = router;
