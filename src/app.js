@@ -17,6 +17,9 @@ const categoryRouter = require('./resources/category/category.router');
 const authRouter = require('./resources/auth/auth.router');
 const { jwtCallback } = require('./resources/auth/auth.repository');
 const addGuard = require('./tools/guards');
+const db = require('./loader/dbconnect');
+
+db.connect();
 
 const auth = passport.authenticate('jwt', { session: false });
 const hbs = exhbs.create({
@@ -33,6 +36,7 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('./public'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(passport.initialize());
 app.use(Logger);

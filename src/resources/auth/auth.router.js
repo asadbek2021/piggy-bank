@@ -6,7 +6,7 @@ const { registerUser, loginUser } = require('./auth.service');
 
 router.post('/login', [
   check('email', 'Your email is not valid.').isEmail(),
-  check('password', 'Your password should be min 4 and max 6').isLength({ min: 4, max: 6 }).isAlphanumeric(),
+  check('password', 'Your password should be min 6 and max 10').isLength({ min: 6, max: 10 }).isAlphanumeric(),
 ], loginUser);
 router.post('/register', [
   check('email', 'Enter the valid email').isEmail(),

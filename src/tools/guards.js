@@ -1,7 +1,7 @@
-const db = require('../loader/dbconnect');
+const User = require('../resources/user/user.model');
 
-const addGuard = function guard(req, res, next) {
-  const user = db.getUserByEmail(req.user.email);
+const addGuard = async function guard(req, res, next) {
+  const [user] = await User.find({ email: req.user.email });
   if (user?.role === 'ADMIN') {
     return next();
   }
