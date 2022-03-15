@@ -1,74 +1,61 @@
-const uuid = require('uuid').v4;
-const { accounts } = require('../../loader/dbconnect');
+const Account = require('./account.model');
 
 async function createAccount(req, res) {
   const {
-    userId,
     title,
     description,
     category,
     currency,
     availableAmount,
   } = req.body;
-  const created = new Date().getTime();
-  const updated = null;
 
   const account = {
-    id: uuid(),
-    userId,
+    user_id: req.user.id,
     title,
     description,
     category,
     currency,
     availableAmount,
-    created,
-    updated,
   };
-  accounts.push(account);
-  res.status(201).json(accounts);
+  const newaccount = await Account.create(account);
+  res.status(201).json(newaccount);
 }
+
 async function updateAccount(req, res) {
   const {
-    id,
-    userId,
+    user_id,
     title,
     description,
     category,
     currency,
     availableAmount,
-    created,
   } = req.body;
-  const updated = new Date().getTime();
   const newaccount = {
-    id,
-    userId,
+    user_id,
     title,
     description,
     category,
     currency,
     availableAmount,
-    created,
-    updated,
   };
-  accounts.push(newaccount);
-  res.status(201).json(accounts);
+  const account = await Account.findByIdAndUpdate(req.params.id, newaccount);
+  res.status(201).json(account);
 }
 async function deleteAccount(req, res) {
   const { id } = req.params;
-  const idx = accounts.findIndex((c) => c.id === id);
-  accounts.slice(idx, 1);
-  res.status(204).redirect('/account');
+  await Account.findByIdAndDelete(id);
+  res.status(204);
 }
 
-async function getAccountById(req, res) {
-  const { id } = req.params;
-  const account = accounts.find((c) => c.id === id);
-  res.json(account);
+async function getAccountByUserId(req, res) {
+  const { id } = req.user;
+  const accounts = await Account.find({ user_id: id });
+  res.json(accounts);
 }
 
 module.exports = {
   createAccount,
   updateAccount,
   deleteAccount,
-  getAccountById,
+  getAccountByUserId,
 };

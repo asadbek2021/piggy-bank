@@ -5,7 +5,7 @@ const transactionSchema = new Schema({
     type: String,
     required: true,
   },
-  account_id: {
+  accountId: {
     type: Schema.Types.ObjectId,
     required: true,
   },
@@ -31,5 +31,9 @@ const transactionSchema = new Schema({
     default: 0,
   },
 }, { timestamps: true });
+
+transactionSchema.statics.findByAccountId = function findByAccountId(accountId) {
+  return this.where({ accountId: new RegExp(accountId, 'i') }).exec();
+};
 
 module.exports = model('Transaction', transactionSchema);
