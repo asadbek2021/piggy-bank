@@ -1,7 +1,5 @@
-const db = require('../../loader/dbconnect');
 const HttpError = require('../../tools/httpError');
-
-const { users } = db;
+const { users } = require('../../loader/db.loader');
 
 async function updateUser(req, res) {
   const index = users.findIndex((c) => c.id === +req.params.id);
@@ -39,9 +37,7 @@ async function getUserById(req, res) {
   });
 }
 async function getUsers(req, res) {
-  res.render('users/user', {
-    users,
-  });
+  res.json(users);
 }
 
 module.exports = {

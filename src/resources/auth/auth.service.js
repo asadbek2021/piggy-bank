@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 const HttpError = require('../../tools/httpError');
 const { register, login } = require('./auth.repository');
-const { users } = require('../../loader/dbconnect');
 const config = require('../../config/config');
 
 async function registerUser(req, res, next) {
@@ -22,7 +21,7 @@ async function registerUser(req, res, next) {
       residence,
     } = req.body;
 
-    register({
+    const user = await register({
       email,
       password,
       role,
@@ -33,7 +32,7 @@ async function registerUser(req, res, next) {
       residence,
     });
 
-    res.json(users);
+    res.json(user);
   } catch (err) {
     next(err);
   }
@@ -46,7 +45,7 @@ async function loginUser(req, res, next) {
       throw new HttpError('Registration error', 403, errors);
     }
     const { email, password } = req.body;
-    const user = login(email, password);
+    const user = await login(email, password);
     if (user) {
       const payload = {
         id: user.id,

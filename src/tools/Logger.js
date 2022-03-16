@@ -1,7 +1,35 @@
-const logger = function Logger(req, res, next) {
-  process.stdout.write(`Query params ${req.query}`);
-  process.stdout.write(`${new Date().toString()} - ${req.method} ${req.originalUrl} `, req.body);
+const {
+  createLogger,
+  transports,
+  format,
+} = require('winston');
+
+const {
+  combine,
+  printf,
+  colorize,
+} = format;
+
+const myFormat = printf(({ level, message, timestamp }) => `${timestamp} [${level}] : ${message}`);
+
+const logger = createLogger({
+  level: 'info',
+  format: combine(
+    colorize(),
+    format.timestamp({ format: 'HH:mm:ss' }),
+    myFormat,
+  ),
+  transports: [
+    new transports.Console(),
+  ],
+});
+const Logger = function Logger(req, res, next) {
+  logger.info(`REQUEST | method: ${req.method},  URL: ${req.url}`);
+  logger.info(`RESPONSE | Status: ${res.statusCode}`);
   next();
 };
 
-module.exports = logger;
+module.exports = {
+  Logger,
+  logger,
+};
