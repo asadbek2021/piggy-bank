@@ -1,25 +1,22 @@
 const { Router } = require('express');
+const {
+  getAllCategories,
+  getCategoryById,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} = require('./category.service');
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.json({ message: 'Get all categories' });
-});
+router.get('/', getAllCategories);
 
-router.get('/:id', (req, res) => {
-  res.json({ message: 'Get category by id' });
-});
+router.get('/:id', getCategoryById);
 
-router.post('/', (req, res) => {
-  res.json({ message: 'Add new category' });
-});
+router.post('/', createCategory);
 
-router.put('/:id', (req, res) => {
-  res.json({ message: 'Update category by id' });
-});
+router.put('/:id', updateCategory);
 
-router.delete('/:id', (req, res) => {
-  res.json({ message: 'Delete category by id' });
-});
+router.delete('/:id', deleteCategory);
 
 module.exports = router;

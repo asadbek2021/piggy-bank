@@ -17,6 +17,7 @@ async function createFaq(req, res, next) {
     next(err);
   }
 }
+
 async function updateFaq(req, res, next) {
   try {
     const faq = await Faq.findByIdAndUpdate(req.params.id, req.body);
