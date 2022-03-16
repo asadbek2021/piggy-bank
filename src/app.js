@@ -14,10 +14,10 @@ const statisticRouter = require('./resources/statistic/statistic.router');
 const categoryRouter = require('./resources/category/category.router');
 const subscriptionRouter = require('./resources/subscription/subscription.router');
 const authRouter = require('./resources/auth/auth.router');
+const obligatoryRouter = require('./resources/obligatory_payment/obligatory.router');
 const faqRouter = require('./resources/faq/faq.router');
 const piggyBankRouter = require('./resources/piggy_bank/piggy.router');
 const { jwtCallback } = require('./resources/auth/auth.repository');
-const addGuard = require('./middlewares/guards');
 const db = require('./loader/dbconnect');
 
 db.connect();
@@ -37,13 +37,14 @@ const opts = {
 };
 passport.use(new Strategy(opts, jwtCallback));
 
-app.use('/user', auth, addGuard, userRouter);
+app.use('/user', auth, userRouter);
 app.use('/transaction', auth, transactionRouter);
 app.use('/account', auth, accountRouter);
-app.use('/statistic', auth, addGuard, statisticRouter);
+app.use('/statistic', auth, statisticRouter);
 app.use('/category', auth, categoryRouter);
 app.use('/piggybank', auth, piggyBankRouter);
 app.use('/subscription', auth, subscriptionRouter);
+app.use('/subscription', auth, obligatoryRouter);
 app.use('/auth', authRouter);
 app.use('/faq', faqRouter);
 app.use('/', require('./resources/home.router'));
