@@ -1,5 +1,5 @@
-const HttpError = require('./httpError');
-const { logger } = require('./Logger');
+const HttpError = require('../tools/httpError');
+const { logger } = require('../tools/Logger');
 
 function errorHandler(err, req, res, next) {
   if (err instanceof HttpError) {
