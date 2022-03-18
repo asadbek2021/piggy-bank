@@ -26,4 +26,4 @@ const subscriptionSchema = new Schema({
   },
 }, { timestamps: true });
 
-module.exports = model('Subscription', subscriptionSchema);
+module.exports = model('Piggybank', subscriptionSchema);

@@ -8,15 +8,13 @@ router.post('/login', [
   check('email', 'Your email is not valid.').isEmail(),
   check('password', 'Your password should be min 8 and max 14, also should contain special characters')
     .isLength({ min: 8, max: 14 })
-    .isAlphanumeric()
-    .matches(/^[A-Za-z0-9 .,:;?!*+%-<>@[]\/{}\\_{}$#/),
+    .isAlphanumeric(),
 ], loginUser);
 router.post('/register', [
   check('email', 'Enter the valid email').isEmail(),
-  check('password', 'Your password should be min 4 and max 6')
+  check('password', 'Your password should be min 8 and max 14, also should contain special characters')
     .isLength({ min: 8, max: 14 })
-    .isAlphanumeric()
-    .matches(/^[A-Za-z0-9 .,:;?!*+%-<>@[]{}\/_{}$#/),
+    .isAlphanumeric(),
   check('role', 'You can choose only one of these roles: ADMIN or USER').isIn(['ADMIN', 'USER']),
 ], registerUser);
 
