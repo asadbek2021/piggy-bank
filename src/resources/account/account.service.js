@@ -41,16 +41,25 @@ async function updateAccount(req, res) {
   const account = await Account.findByIdAndUpdate(req.params.id, newaccount);
   res.status(201).json(account);
 }
-async function deleteAccount(req, res) {
-  const { id } = req.params;
-  await Account.findByIdAndDelete(id);
-  res.status(204);
+async function deleteAccount(req, res, next) {
+  try {
+    const { id } = req.params;
+    await Account.findByIdAndDelete(id);
+    console.log('Asad');
+    res.status(204).json();
+  } catch (err) {
+    next(err);
+  }
 }
 
-async function getAccountByUserId(req, res) {
-  const { id } = req.user;
-  const accounts = await Account.find({ user_id: id });
-  res.json(accounts);
+async function getAccountByUserId(req, res, next) {
+  try {
+    const { id } = req.user;
+    const accounts = await Account.find({ user_id: id });
+    res.json(accounts);
+  } catch (err) {
+    next(err);
+  }
 }
 
 module.exports = {

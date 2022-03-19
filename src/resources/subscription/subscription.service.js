@@ -41,7 +41,7 @@ async function deleteSubscription(req, res, next) {
   try {
     const { id } = req.params;
     await Subscription.findByIdAndDelete(id);
-    res.status(204).end();
+    res.status(204).json();
   } catch (err) {
     next(err);
   }

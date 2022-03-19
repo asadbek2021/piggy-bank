@@ -28,7 +28,7 @@ async function createObligatory(req, res, next) {
 async function updateObligatory(req, res, next) {
   try {
     const { id } = req.params;
-    const obligatory = await Obligatory.findById(id);
+    const obligatory = await Obligatory.findByIdAndUpdate(id, req.body, { new: true });
     res.json(obligatory);
   } catch (err) {
     next(err);
@@ -38,7 +38,7 @@ async function deleteObligatory(req, res, next) {
   try {
     const { id } = req.params;
     await Obligatory.findByIdAndDelete(id);
-    res.status(204).end();
+    res.status(204).json();
   } catch (err) {
     next(err);
   }
