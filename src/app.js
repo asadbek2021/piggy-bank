@@ -24,7 +24,6 @@ db.connect();
 
 const auth = passport.authenticate('jwt', { session: false });
 
-app.use(express.static('./public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
