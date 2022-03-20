@@ -17,8 +17,8 @@ async function createAccount(req, res) {
     currency,
     availableAmount,
   };
-  const newaccount = await Account.create(account);
-  res.status(201).json(newaccount);
+  const newAccount = await Account.create(account);
+  res.status(201).json(newAccount);
 }
 
 async function updateAccount(req, res) {
@@ -30,7 +30,7 @@ async function updateAccount(req, res) {
     currency,
     availableAmount,
   } = req.body;
-  const newaccount = {
+  const newAccount = {
     user_id,
     title,
     description,
@@ -38,14 +38,13 @@ async function updateAccount(req, res) {
     currency,
     availableAmount,
   };
-  const account = await Account.findByIdAndUpdate(req.params.id, newaccount);
+  const account = await Account.findByIdAndUpdate(req.params.id, newAccount);
   res.status(201).json(account);
 }
 async function deleteAccount(req, res, next) {
   try {
     const { id } = req.params;
     await Account.findByIdAndDelete(id);
-    console.log('Asad');
     res.status(204).json();
   } catch (err) {
     next(err);

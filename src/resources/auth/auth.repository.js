@@ -21,7 +21,7 @@ async function register(user) {
   } = user;
 
   const hashed = await bcrypt.hashSync(password, 10);
-  const newuser = await User.create({
+  const newUser = await User.create({
     id: uuid(),
     email,
     role,
@@ -32,13 +32,13 @@ async function register(user) {
     residence,
     password: hashed,
   });
-  return newuser;
+  return newUser;
 }
 
 async function login(email, password) {
   const user = await getUserByEmail(email);
-  const isSame = await bcrypt.compare(password, user.password);
-  if (user && isSame) {
+  const result = await bcrypt.compare(password, user.password);
+  if (user && result) {
     return user;
   }
   return null;
@@ -46,10 +46,7 @@ async function login(email, password) {
 
 async function jwtCallback(jwtPayload, done) {
   const user = await getUserByEmail(jwtPayload.email);
-  if (user) {
-    return done(null, user);
-  }
-  return done(null, false);
+  return done(null, user || false);
 }
 
 module.exports = {

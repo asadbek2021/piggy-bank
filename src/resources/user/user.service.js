@@ -35,7 +35,6 @@ async function getUserById(req, res, next) {
 }
 async function getUsers(req, res, next) {
   try {
-    console.log('Users ');
     const allusers = await UserRepository.getUserAll();
     res.json(allusers);
   } catch (err) {

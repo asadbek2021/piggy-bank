@@ -61,11 +61,4 @@ userSchema.virtual('fullname').get(function getFullname() {
   this.lastname = lastname;
 });
 
-// userSchema.pre('save', function(next) {
-//   if (this.isModified('password')) {
-//     this.password = this.hashPassword(this.password);
-//   }
-//   next();
-// });
-
 module.exports = model('User', userSchema);

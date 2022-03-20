@@ -20,7 +20,6 @@ async function registerUser(req, res, next) {
       birthday,
       residence,
     } = req.body;
-    console.log(new Date().getFullYear() - new Date(birthday).getFullYear());
     if (new Date().getFullYear() - new Date(birthday).getFullYear() >= 18) {
       const user = await register({
         email,

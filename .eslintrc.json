@@ -20,6 +20,8 @@
         "no-console":"off",
         "no-unused-vars":"error",
         "camelcase":"off",
-        "semi":"warn"
-    }
+        "semi":"warn",
+        "class-methods-use-this":"off"
+    },
+    "ignorePatterns": ["**/test.js"]
 }
