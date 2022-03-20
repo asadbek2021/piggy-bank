@@ -1,8 +1,12 @@
 const bcrypt = require('bcrypt');
 const uuid = require('uuid').v4;
 
-const { users } = require('../../loader/db.loader');
-const { getUserByEmail } = require('../user/user.repository');
+const User = require('../user/user.model');
+
+async function getUserByEmail(email) {
+  const user = await User.find({ email });
+  return user[0];
+}
 
 async function register(user) {
   const {
@@ -16,7 +20,8 @@ async function register(user) {
     password,
   } = user;
 
-  users.push({
+  const hashed = await bcrypt.hashSync(password, 10);
+  const newuser = await User.create({
     id: uuid(),
     email,
     role,
@@ -25,12 +30,15 @@ async function register(user) {
     gender,
     birthday,
     residence,
-    password: bcrypt.hashSync(password, 10),
+    password: hashed,
   });
+  return newuser;
 }
+
 async function login(email, password) {
   const user = await getUserByEmail(email);
-  if (user && bcrypt.compareSync(password, user.password)) {
+  const isSame = await bcrypt.compare(password, user.password);
+  if (user && isSame) {
     return user;
   }
   return null;

@@ -1,11 +1,11 @@
 const { Router } = require('express');
 const {
-  createAccount, deleteAccount, getAccountById, updateAccount,
+  createAccount, deleteAccount, getAccountByUserId, updateAccount,
 } = require('./account.service');
 
 const router = Router();
 
-router.get('/:id', getAccountById);
+router.get('/', getAccountByUserId);
 
 router.post('/', createAccount);
 

@@ -1,18 +1,13 @@
 const { Router } = require('express');
+const { getAllTransAccount, getTransById, createTrans } = require('./transaction.service');
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.json({ message: 'Get all expenses' });
-});
+router.get('/', getAllTransAccount);
 
-router.get('/:id', (req, res) => {
-  res.json({ message: 'Get expense by id' });
-});
+router.get('/:id', getTransById);
 
-router.post('/', (req, res) => {
-  res.json({ message: 'Add new expense' });
-});
+router.post('/', createTrans);
 
 router.put('/:id', (req, res) => {
   res.json({ message: 'Update expense by id' });

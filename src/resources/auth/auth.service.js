@@ -20,19 +20,21 @@ async function registerUser(req, res, next) {
       birthday,
       residence,
     } = req.body;
-
-    const user = await register({
-      email,
-      password,
-      role,
-      firstname,
-      lastname,
-      gender,
-      birthday,
-      residence,
-    });
-
-    res.json(user);
+    if (new Date().getFullYear() - new Date(birthday).getFullYear() >= 18) {
+      const user = await register({
+        email,
+        password,
+        role,
+        firstname,
+        lastname,
+        gender,
+        birthday,
+        residence,
+      });
+      res.json(user);
+    } else {
+      throw new HttpError('Registering age is over 18 y.o', 401);
+    }
   } catch (err) {
     next(err);
   }
