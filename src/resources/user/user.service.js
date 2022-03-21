@@ -1,9 +1,9 @@
 const HttpError = require('../../tools/httpError');
-const User = require('./user.model');
+const UserRepository = require('./user.repository');
 
 async function updateUser(req, res, next) {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body);
+    const user = await UserRepository.editUser(req.params.id, req.body);
     if (!user) {
       throw new HttpError(`There is no user with the id ${req.params.id} `, 404);
     }
@@ -15,9 +15,8 @@ async function updateUser(req, res, next) {
 
 async function deleteUser(req, res, next) {
   try {
-    await User.findByIdAndDelete(req.params.id);
-    res.status(204);
-    res.redirect('/user');
+    await UserRepository.removeUser(req.params.id);
+    res.status(204).json();
   } catch (err) {
     next(err);
   }
@@ -25,7 +24,7 @@ async function deleteUser(req, res, next) {
 
 async function getUserById(req, res, next) {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await UserRepository.getUserByID(req.params.id);
     if (!user) {
       throw new HttpError(`There is no user with the id ${req.params.id} `, 404);
     }
@@ -36,7 +35,7 @@ async function getUserById(req, res, next) {
 }
 async function getUsers(req, res, next) {
   try {
-    const allusers = await User.find();
+    const allusers = await UserRepository.getUserAll();
     res.json(allusers);
   } catch (err) {
     next(err);

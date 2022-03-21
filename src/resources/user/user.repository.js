@@ -1,10 +1,24 @@
-const { users } = require('../../loader/db.loader');
+const User = require('./user.model');
 
-async function getUserByEmail(email) {
-  const user = users.find((c) => c.email === email);
-  return user;
+class UserRepository {
+  async getUserAll() {
+    const users = await User.find({});
+    return users;
+  }
+
+  async getUserByID(id) {
+    const user = await User.findById(id);
+    return user;
+  }
+
+  async editUser(id, body) {
+    const user = await User.findByIdAndUpdate(id, body, { new: true });
+    return user;
+  }
+
+  async removeUser(id) {
+    await User.findByIdAndDelete(id);
+  }
 }
 
-module.exports = {
-  getUserByEmail,
-};
+module.exports = new UserRepository();

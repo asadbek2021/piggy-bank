@@ -1,8 +1,8 @@
-const Subscription = require('./subscription.model');
+const SubscriptionRepository = require('./subscription.repository');
 
 async function getAllSubscriptions(req, res, next) {
   try {
-    const subscriptions = await Subscription.find({});
+    const subscriptions = await SubscriptionRepository.getSubsAll({});
     res.json(subscriptions);
   } catch (err) {
     next(err);
@@ -12,7 +12,7 @@ async function getAllSubscriptions(req, res, next) {
 async function getSubscriptionById(req, res, next) {
   try {
     const { id } = req.params;
-    const subscription = await Subscription.findById(id);
+    const subscription = await SubscriptionRepository.getSubsByID(id);
     res.json(subscription);
   } catch (err) {
     next(err);
@@ -21,7 +21,7 @@ async function getSubscriptionById(req, res, next) {
 
 async function createSubscription(req, res, next) {
   try {
-    const subscription = await Subscription.create(req.body);
+    const subscription = await SubscriptionRepository.createSubs(req.body);
     res.json(subscription);
   } catch (err) {
     next(err);
@@ -30,7 +30,7 @@ async function createSubscription(req, res, next) {
 async function updateSubscription(req, res, next) {
   try {
     const { id } = req.params;
-    const subscription = await Subscription.findByIdAndUpdate(id, req.body, { new: true });
+    const subscription = await SubscriptionRepository.editSubs(id, req.body, { new: true });
     res.json(subscription);
   } catch (err) {
     next(err);
@@ -40,8 +40,8 @@ async function updateSubscription(req, res, next) {
 async function deleteSubscription(req, res, next) {
   try {
     const { id } = req.params;
-    await Subscription.findByIdAndDelete(id);
-    res.status(204).end();
+    await SubscriptionRepository.removeSubs(id);
+    res.status(204).json();
   } catch (err) {
     next(err);
   }

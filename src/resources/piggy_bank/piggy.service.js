@@ -42,7 +42,7 @@ async function crashPiggyBank(req, res, next) {
   try {
     const { id } = req.params;
     await PiggyBank.findByIdAndDelete(id);
-    res.json({ message: 'crashPiggyBank' });
+    res.status(204).json();
   } catch (err) {
     next(err);
   }

@@ -30,7 +30,7 @@ async function updateFaq(req, res, next) {
 async function deleteFaq(req, res, next) {
   try {
     await Faq.findByIdAndDelete(req.params.id);
-    res.status(204);
+    res.status(204).json();
   } catch (err) {
     next(err);
   }

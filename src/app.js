@@ -24,7 +24,6 @@ db.connect();
 
 const auth = passport.authenticate('jwt', { session: false });
 
-app.use(express.static('./public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -44,10 +43,9 @@ app.use('/statistic', auth, statisticRouter);
 app.use('/category', auth, categoryRouter);
 app.use('/piggybank', auth, piggyBankRouter);
 app.use('/subscription', auth, subscriptionRouter);
-app.use('/subscription', auth, obligatoryRouter);
+app.use('/obligatory', auth, obligatoryRouter);
 app.use('/auth', authRouter);
 app.use('/faq', faqRouter);
-app.use('/', require('./resources/home.router'));
 
 app.use(errorHandler);
 

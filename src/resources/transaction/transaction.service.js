@@ -22,27 +22,27 @@ async function getTransById(req, res, next) {
 
 async function createTrans(req, res, next) {
   try {
-    const {
-      type,
-      title,
-      accountId,
-      description,
-      date_of_operation,
-      category,
-      amount,
-    } = req.body;
-    const newtransaction = {
-      type,
-      title,
-      accountId,
-      description,
-      date_of_operation,
-      category,
-      amount,
-    };
-
-    const transaction = await Transaction.create(newtransaction);
+    const transaction = await Transaction.create(req.body);
     res.json(transaction);
+  } catch (err) {
+    next(err);
+  }
+}
+async function updateTrans(req, res, next) {
+  try {
+    const { id } = req.params;
+    const transaction = await Transaction.findByIdAndUpdate(id, req.body, { new: true });
+    res.json(transaction);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function deleteTrans(req, res, next) {
+  try {
+    const { id } = req.params;
+    await Transaction.findByIdAndDelete(id);
+    res.status(204).json();
   } catch (err) {
     next(err);
   }
@@ -52,4 +52,6 @@ module.exports = {
   getAllTransAccount,
   getTransById,
   createTrans,
+  updateTrans,
+  deleteTrans,
 };
