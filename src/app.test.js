@@ -1,6 +1,6 @@
 const supertest = require('supertest');
-const app = require('../src/app');
-const { mongoose } = require('../src/loader/dbconnect')
+const app = require('./app');
+const { mongoose } = require('./loader/dbconnect')
 
 describe('Application testing crud operation', () => {
   const customuser = {
