@@ -1,4 +1,4 @@
-const HttpError = require('../src/tools/httpError');
+const HttpError = require('../');
 
 
 
