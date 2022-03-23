@@ -1,5 +1,17 @@
 # TodoList
 
+## To start with angular
+ ```npm i -g @angular/cli```
+
+## To create new application
+```ng new application-name```
+
+## Angular es-lint
+```ng add @angular-eslint/schematics```
+
+## Angular material
+```ng add @angular/material```
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
 ## Development server
