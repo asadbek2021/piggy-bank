@@ -19,10 +19,9 @@ const faqRouter = require('./resources/faq/faq.router');
 const piggyBankRouter = require('./resources/piggy_bank/piggy.router');
 const { jwtCallback } = require('./resources/auth/auth.repository');
 const db = require('./loader/dbconnect');
+const auth = require('./middlewares/authMiddleware');
 
 db.connect();
-
-const auth = passport.authenticate('jwt', { session: false });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -46,7 +45,6 @@ app.use('/subscription', auth, subscriptionRouter);
 app.use('/obligatory', auth, obligatoryRouter);
 app.use('/auth', authRouter);
 app.use('/faq', faqRouter);
-
 app.use(errorHandler);
 
 module.exports = app;

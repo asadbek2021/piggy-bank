@@ -4,10 +4,14 @@ const transactionSchema = new Schema({
   type: {
     type: String,
     required: true,
+    validate: {
+      validator: (type) => ['income', 'expense'].includes(type),
+    },
   },
   accountId: {
     type: Schema.Types.ObjectId,
     required: true,
+    ref: 'Account',
   },
   title: {
     type: String,
@@ -15,11 +19,12 @@ const transactionSchema = new Schema({
   },
   description: {
     type: String,
-    default: 'Description',
+    default: null,
   },
   date_of_operation: {
     type: Date,
     required: true,
+    default: Date.now,
   },
   category: {
     type: String,
@@ -33,7 +38,7 @@ const transactionSchema = new Schema({
 }, { timestamps: true });
 
 transactionSchema.statics.findByAccountId = function findByAccountId(accountId) {
-  return this.where({ accountId: new RegExp(accountId, 'i') }).exec();
+  return this.where({ accountId }).exec();
 };
 
 module.exports = model('Transaction', transactionSchema);

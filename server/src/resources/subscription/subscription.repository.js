@@ -1,8 +1,8 @@
 const Subscription = require('./subscription.model');
 
 class SubscriptionRepository {
-  async getSubsAll() {
-    const users = await Subscription.find({});
+  async getSubsAll(id) {
+    const users = await Subscription.find({ account_id: id });
     return users;
   }
 

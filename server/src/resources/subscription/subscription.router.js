@@ -9,11 +9,11 @@ const {
 
 const router = Router();
 
-router.get('/', getAllSubscriptions);
+router.get('/:accountId', getAllSubscriptions);
 
 router.get('/:id', getSubscriptionById);
 
-router.post('/', createSubscription);
+router.post('/:accountId', createSubscription);
 
 router.put('/:id', updateSubscription);
 

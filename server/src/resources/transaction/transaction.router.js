@@ -9,11 +9,11 @@ const {
 
 const router = Router();
 
-router.get('/', getAllTransAccount);
+router.get('/:accoundId', getAllTransAccount);
 
-router.get('/:id', getTransById);
+router.get('/account/:id', getTransById);
 
-router.post('/', createTrans);
+router.post('/:accountId', createTrans);
 
 router.put('/:id', updateTrans);
 

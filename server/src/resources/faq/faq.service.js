@@ -9,6 +9,15 @@ async function getAllFaqs(req, res, next) {
   }
 }
 
+async function getFaqById(req, res, next) {
+  try {
+    const faq = await Faq.findById(req.params.id);
+    res.json(faq);
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function createFaq(req, res, next) {
   try {
     const faq = await Faq.create(req.body);
@@ -20,7 +29,7 @@ async function createFaq(req, res, next) {
 
 async function updateFaq(req, res, next) {
   try {
-    const faq = await Faq.findByIdAndUpdate(req.params.id, req.body);
+    const faq = await Faq.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(faq);
   } catch (err) {
     next(err);
@@ -41,4 +50,5 @@ module.exports = {
   createFaq,
   updateFaq,
   deleteFaq,
+  getFaqById,
 };

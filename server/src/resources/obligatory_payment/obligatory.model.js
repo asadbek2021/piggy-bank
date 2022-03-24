@@ -27,7 +27,7 @@ const ObligatorySchema = new Schema({
     required: true,
   },
   frequency: {
-    type: String,
+    type: Number,
     required: true,
   },
 }, { timestamps: true });

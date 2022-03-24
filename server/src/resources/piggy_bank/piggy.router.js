@@ -9,11 +9,11 @@ const {
 
 const router = Router();
 
-router.get('/', getAllPiggyBanks);
+router.get('/:accountId', getAllPiggyBanks);
 
-router.get('/:id', getPiggyBankById);
+router.get('/account/:id', getPiggyBankById);
 
-router.post('/', createPiggyBank);
+router.post('/:accountId', createPiggyBank);
 
 router.put('/:id', updatePiggyBank);
 

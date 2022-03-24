@@ -19,7 +19,7 @@ async function getObligatoryById(req, res, next) {
 }
 async function createObligatory(req, res, next) {
   try {
-    const obligatory = await Obligatory.create(req.body);
+    const obligatory = await Obligatory.create({ ...req.body, userId: req.user.id });
     res.json(obligatory);
   } catch (err) {
     next(err);

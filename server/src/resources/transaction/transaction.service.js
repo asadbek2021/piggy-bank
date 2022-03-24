@@ -2,8 +2,8 @@ const Transaction = require('./transaction.model');
 
 async function getAllTransAccount(req, res, next) {
   try {
-    const { id } = req.params;
-    const transactions = await Transaction.findByAccountId(id);
+    const { accoundId } = req.params;
+    const transactions = await Transaction.findByAccountId(accoundId);
     res.json(transactions);
   } catch (err) {
     next(err);
@@ -13,8 +13,8 @@ async function getAllTransAccount(req, res, next) {
 async function getTransById(req, res, next) {
   try {
     const { id } = req.params;
-    const transactions = await Transaction.findById(id);
-    res.json(transactions);
+    const transaction = await Transaction.findById(id);
+    res.json(transaction);
   } catch (err) {
     next(err);
   }
@@ -22,7 +22,7 @@ async function getTransById(req, res, next) {
 
 async function createTrans(req, res, next) {
   try {
-    const transaction = await Transaction.create(req.body);
+    const transaction = await Transaction.create({ ...req.body, accountId: req.params.accountId });
     res.json(transaction);
   } catch (err) {
     next(err);

@@ -2,7 +2,8 @@ const PiggyBank = require('./piggy.model');
 
 async function getAllPiggyBanks(req, res, next) {
   try {
-    const piggyBanks = await PiggyBank.find({});
+    const { accountId } = req.params;
+    const piggyBanks = await PiggyBank.find({ accountId });
     res.json(piggyBanks);
   } catch (err) {
     next(err);
@@ -21,7 +22,7 @@ async function getPiggyBankById(req, res, next) {
 
 async function createPiggyBank(req, res, next) {
   try {
-    const piggybank = await PiggyBank.create(req.body);
+    const piggybank = await PiggyBank.create({ ...req.body, accountId: req.params.accountId });
     res.json(piggybank);
   } catch (err) {
     next(err);

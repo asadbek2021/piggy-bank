@@ -12,12 +12,16 @@ const accountSchema = new Schema({
   },
   description: {
     type: String,
-    default: 'Description',
+    default: null,
   },
   currency: {
     type: String,
     required: true,
   },
 }, { timestamps: true });
+
+accountSchema.statics.getByUserId = function getById(user_id) {
+  return this.where({ user_id }).exec();
+};
 
 module.exports = model('Account', accountSchema);

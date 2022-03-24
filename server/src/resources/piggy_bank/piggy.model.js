@@ -13,7 +13,7 @@ const subscriptionSchema = new Schema({
   },
   description: {
     type: String,
-    default: 'Description',
+    default: null,
   },
   goal: {
     type: Number,

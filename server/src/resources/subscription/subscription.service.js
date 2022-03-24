@@ -2,7 +2,7 @@ const SubscriptionRepository = require('./subscription.repository');
 
 async function getAllSubscriptions(req, res, next) {
   try {
-    const subscriptions = await SubscriptionRepository.getSubsAll({});
+    const subscriptions = await SubscriptionRepository.getSubsAll(req.params.accountId);
     res.json(subscriptions);
   } catch (err) {
     next(err);
@@ -21,7 +21,10 @@ async function getSubscriptionById(req, res, next) {
 
 async function createSubscription(req, res, next) {
   try {
-    const subscription = await SubscriptionRepository.createSubs(req.body);
+    const subscription = await SubscriptionRepository.createSubs({
+      ...req.body,
+      account_id: req.params.accountId,
+    });
     res.json(subscription);
   } catch (err) {
     next(err);
