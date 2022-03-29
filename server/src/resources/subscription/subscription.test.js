@@ -1,18 +1,14 @@
 const supertest = require('supertest');
 const app = require('../');
-const SubscriptionRepository = require('./subscription.repository');
 const { mongoose } = require('../../loader/dbconnect');
 
 const request = supertest(app);
 
-
-
-describe ('User testing', () => {
-
+describe('User testing', () => {
   beforeAll(async () => {
     await mongoose.connection.close();
-    await mongoose.connect(`mongodb://localhost:27017/test`);
-    await  mongoose.connection.db.dropCollection('subscriptions');
+    await mongoose.connect('mongodb://localhost:27017/test');
+    await mongoose.connection.db.dropCollection('subscriptions');
   });
 
   afterAll(async () => {

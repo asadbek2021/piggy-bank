@@ -30,6 +30,7 @@ async function createSubscription(req, res, next) {
     next(err);
   }
 }
+
 async function updateSubscription(req, res, next) {
   try {
     const { id } = req.params;

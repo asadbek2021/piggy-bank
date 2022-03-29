@@ -60,10 +60,8 @@ async function loginUser(req, res, next) {
         { expiresIn: config.JWT_EXPIRES_IN },
       );
       res.status(200).json({
-        id: user.id,
-        email: user.email,
-        role: user.role,
         token: `Bearer ${token}`,
+        expiresIn: config.JWT_EXPIRES_IN,
       });
     } else {
       throw new HttpError('Invalid credentials!', 404);

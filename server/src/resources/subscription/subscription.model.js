@@ -15,12 +15,15 @@ const subscriptionSchema = new Schema({
   },
   first_day_payment: {
     type: Date,
+    required: true,
   },
   last_day_payment: {
     type: Date,
+    required: true,
   },
   day_of_payment: {
     type: Date,
+    required: true,
   },
   category: {
     type: String,
