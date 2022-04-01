@@ -9,19 +9,21 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
   ],
   imports: [
-BrowserModule,
+  BrowserModule,
   BrowserAnimationsModule,
   AuthModule,
   TodoModule,
   SharedModule,
   AppRoutingModule,
-  HttpClientModule
+  HttpClientModule,
+  MatButtonModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
