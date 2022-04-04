@@ -37,9 +37,11 @@ async function register(user) {
 
 async function login(email, password) {
   const user = await getUserByEmail(email);
-  const result = await bcrypt.compare(password, user.password);
-  if (user && result) {
-    return user;
+  if (user) {
+    const result = await bcrypt.compare(password, user.password);
+    if (result) {
+      return user;
+    }
   }
   return null;
 }

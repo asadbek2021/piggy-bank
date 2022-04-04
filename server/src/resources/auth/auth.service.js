@@ -8,7 +8,7 @@ async function registerUser(req, res, next) {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new HttpError('Registration error', 403, errors);
+      throw new HttpError('Validation error: ', 403, errors);
     }
     const {
       email,
@@ -44,7 +44,7 @@ async function loginUser(req, res, next) {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new HttpError('Registration error', 403, errors);
+      throw new HttpError('Invalid credentials!', 403, errors);
     }
     const { email, password } = req.body;
     const user = await login(email, password);

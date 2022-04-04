@@ -8,9 +8,11 @@ function errorHandler(err, req, res, next) {
       res.status(err.statusCode).json({ message: err.message, body: err.body });
     } else {
       res.status(err.statusCode).json({ message: err.message });
+      logger.error(`RESPONSE | Status: ${err.statusCode} message: ${err.message}`);
     }
   } else {
     res.status(500).json(err.message);
+    logger.error(`RESPONSE | Status: 500 message: ${err.message}`);
   }
   next();
 }
