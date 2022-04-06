@@ -1,24 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/services/auth.service';
 import { Router } from '@angular/router';
-import { User } from './users';
+import { SpinnerService } from './shared/services/spinner.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'todo-list';
-  constructor(private authService:AuthService, private router:Router) { }
+  isSpinnerVisible:boolean = false;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private spinnerService: SpinnerService
+    ) { }
+
+  ngOnInit(): void {
+    this.spinnerService.getIsSpinnerVisible$().subscribe((value:boolean)=>{
+      this.isSpinnerVisible = value;
+    })
+  }
 
   get isLoggedIn():boolean {
     return this.authService.isLoggedIn();
   }
+
   logout():void {
     this.authService.logout();
     this.router.navigateByUrl('/login');
   }
+
+
 
 
 }

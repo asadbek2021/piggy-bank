@@ -1,0 +1,20 @@
+<mat-card class="task" *ngFor="let transaction of todoTasks; let i = index">
+  <mat-card-title class="task__title"> {{transaction.title}}</mat-card-title>
+  <mat-card-content>
+    <p class="task__description">{{transaction.description}}</p>
+    <div class="task__dates">
+      <div>Created at: {{transaction.createdAt | date}}</div>
+      <div>Updated at: {{transaction.updatedAt | date}}</div>
+      <div>Amount: {{transaction.amount}}</div>
+      <div>Date of operation at: {{transaction.date_of_operation | date}}</div>
+      <div>Type: {{transaction.type}}</div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button class="task__button" mat-flat-button color="warn">Delete</button>
+  </mat-card-actions>
+  <mat-card-footer  class="task__footer">
+    Category:  {{transaction.category}}
+  </mat-card-footer>
+
+</mat-card>

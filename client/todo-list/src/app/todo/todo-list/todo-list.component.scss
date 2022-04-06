@@ -1,0 +1,17 @@
+@use 'src/variables' as var;
+
+.task {
+
+  margin-top: 16px;
+  &__dates{
+    color: var.$gray;
+  }
+
+  &__button{
+    margin-right: 8px;
+  }
+  &__footer{
+    color: green;
+    padding: 16px;
+  }
+}
