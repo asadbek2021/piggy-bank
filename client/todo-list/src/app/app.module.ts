@@ -19,22 +19,22 @@ import { LayoutModule } from './layout/layout.module';
     NotFoundComponent,
   ],
   imports: [
-  BrowserModule,
-  BrowserAnimationsModule,
-  AuthModule,
-  MainModule,
-  SharedModule,
-  AppRoutingModule,
-  HttpClientModule,
-  MatButtonModule,
-  LayoutModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    AuthModule,
+    MainModule,
+    SharedModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatButtonModule,
+    LayoutModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }

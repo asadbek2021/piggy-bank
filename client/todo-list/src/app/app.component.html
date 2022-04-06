@@ -1,6 +1,7 @@
 <mat-sidenav-container class="sidenav">
     <mat-sidenav mode="over" position="end" class="sidenav__aside" #aside>Some menu will be there</mat-sidenav>
     <mat-sidenav-content class="sidenav__content">
+      <app-spinner *ngIf="isSpinnerVisible"></app-spinner>
       <app-header *ngIf="isLoggedIn" (sideNavToggle)="aside.toggle()"></app-header>
       <!-- <button routerLink="/main" *ngIf="isLoggedIn" >Main page</button>
       <button routerLink="/login" *ngIf="isLoggedIn" (click)="logout()" >Logout</button> -->

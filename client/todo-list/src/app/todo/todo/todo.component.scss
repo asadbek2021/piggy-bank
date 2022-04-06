@@ -1,0 +1,17 @@
+.main{
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__cards{
+    width: 200px;
+  }
+  &__content{
+    width: 700px;
+  }
+  &__side{
+    width: 400px;
+  }
+
+
+}
