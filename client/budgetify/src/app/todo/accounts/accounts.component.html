@@ -1,0 +1,14 @@
+<div class="accounts">
+  <mat-card class="task" *ngFor="let account of accounts; let i = index">
+    <mat-card-title class="task__title"> {{account.title}}</mat-card-title>
+    <mat-card-content>
+      <p class="task__description">{{account.description}}</p>
+      <div class="task__dates">
+        <div>Created at: {{account.createdAt | date}}</div>
+        <div>Updated at: {{account.updatedAt | date}}</div>
+        <div>Currency: {{account.currency}}</div>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>

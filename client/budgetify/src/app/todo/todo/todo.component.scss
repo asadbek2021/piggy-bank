@@ -1,0 +1,17 @@
+.main{
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__accounts{
+    width: 300px;
+  }
+  &__content{
+    width: 650px;
+  }
+  &__side{
+    width: 350px;
+  }
+
+
+}
