@@ -11,11 +11,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 
 @NgModule({
   declarations: [
-    SpinnerComponent
+    SpinnerComponent,
+    SidenavComponent
   ],
   imports: [
     CommonModule,

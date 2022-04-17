@@ -1,0 +1,34 @@
+<div class="transaction__container">
+  <app-search-todo></app-search-todo>
+
+<div class="transaction-wrapper">
+  <mat-card class="transaction" *ngFor="let transaction of (transactions | transactionSelect: transactionSelType)">
+    <div class="transaction__category">
+      <p>{{transaction.category}}</p>
+    </div>
+    <div class="transaction__content">
+      <mat-card-title class="transaction__title"> {{transaction.title}}</mat-card-title>
+      <div class="transaction__info">
+        <span class="transaction__type">
+          <span class="transaction__type-icon">
+            <mat-icon>{{transaction.type == 'expense' ? 'arrow_upward': 'arrow_downward' }}</mat-icon>
+          </span>
+        </span>
+        <span class="transaction__info-detail">
+          <span class="transaction__type-text">{{transaction.type}}</span>
+        <span class="transaction-dot">.</span>
+        <span> {{transaction.date_of_operation | date:'dd.MM.YYYY'}}</span>
+        <span class="transaction-dot">.</span>
+        <span class="transaction__payee">{{transaction.payee}}</span>
+        </span>
+      </div>
+    </div>
+
+    <div  class="transaction__price" >
+     <p [ngStyle]="{color: transaction.type=='expense'? '#EE3F19':'21C206'}">
+       {{transaction.amount | currency:'USD':'symbol':'4.2-2'}}
+      </p>
+    </div>
+  </mat-card>
+</div>
+</div>

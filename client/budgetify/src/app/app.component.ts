@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/services/auth.service';
 import { Router } from '@angular/router';
 import { SpinnerService } from './shared/services/spinner.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,8 @@ import { SpinnerService } from './shared/services/spinner.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  title = 'todo-list';
   isSpinnerVisible:boolean = false;
-
+  authSubs!:Subscription;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -21,6 +21,11 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.spinnerService.getIsSpinnerVisible$().subscribe((value:boolean)=>{
       this.isSpinnerVisible = value;
+    })
+    this.authSubs = this.authService.isLoggedIn$.subscribe(isLogged=>{
+      if(!isLogged){
+        this.router.navigate(['/login']);
+      }
     })
   }
 

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './todo/todo.component';
 import { AuthGuard } from './../auth/auth.guard';
-import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoListComponent } from './todo-list/transaction.component';
 import { SharedModule } from '../shared/shared.module';
 import { CreateTodoComponent } from './create-todo/create-todo.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { StatisticComponent } from '../statistic/statistic.component';
 import { ObligatoryComponent } from '../obligatory/obligatory.component';
 import { AdminComponent } from '../admin/admin.component';
 import { SubscriptionComponent } from '../subscription/subscription.component';
-
+import { TransactionSelectPipe } from '../pipes/transaction-select.pipe';
 const routes: Routes = [
   {
     path: 'main',
@@ -56,6 +56,7 @@ const routes: Routes = [
     CreateTodoComponent,
     SearchTodoComponent,
     AccountsComponent,
+    TransactionSelectPipe
   ],
   imports: [
     CommonModule,

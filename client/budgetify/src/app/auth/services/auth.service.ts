@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap, Observable, catchError, of } from 'rxjs';
+import { tap, Observable, catchError, of, Subject, BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AuthService {
   private backednUrl = 'http://localhost:3000/auth';
   constructor(private http:HttpClient, private snackBar: MatSnackBar) { }
-
+  isLoggedIn$ = new Subject<boolean>();
   login(email:string, password:string) {
     return this.http.post(`${this.backednUrl}/login`, {email, password}).pipe(
       tap(res =>  this.setSession(res)),
@@ -21,6 +21,7 @@ export class AuthService {
   isLoggedIn(){
     const expiresIn = localStorage.getItem('expiresIn');
     if(expiresIn){
+      this.isLoggedIn$.next(Date.now() < +expiresIn)
       return Date.now() < +expiresIn;
     }
     return false;

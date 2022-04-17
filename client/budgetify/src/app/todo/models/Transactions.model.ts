@@ -6,6 +6,7 @@ export interface ITransaction {
   description: string;
   category: string;
   amount: number;
+  payee: string;
   date_of_operation: string;
   createdAt: string;
   updatedAt: string;

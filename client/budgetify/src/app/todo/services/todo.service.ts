@@ -35,7 +35,8 @@ export class TodoService {
       completed: false,
     },
   ];
-  private accounts: Array<IAccounts> = [];
+
+  selectedType$ = new Subject<string>();
 
   constructor(
     private http: HttpClient,
@@ -44,8 +45,8 @@ export class TodoService {
 
   todoTasks$: Subject<ITodoItem[]> = new BehaviorSubject([...this.todoTasks]);
 
-  getTransactions() {
-    return this.http.get<ITransaction[]>(`${this.baseUrl}/transaction/`);
+  getTransactions(accountId:string) {
+    return this.http.get<ITransaction[]>(`${this.baseUrl}/transaction/${accountId}`);
   }
 
   createTodo(newTodo: ITodoItem) {
@@ -68,6 +69,6 @@ export class TodoService {
   }
 
   getAccounts() {
-    return this.http.get<IAccounts[]>(`${this.baseUrl}/account`);
+    return this.accountService.getAccounts();
   }
 }

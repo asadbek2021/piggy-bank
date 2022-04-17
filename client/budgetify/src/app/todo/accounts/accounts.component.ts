@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AccountService } from 'src/app/services/account.service';
 import IAccounts from '../models/Accounts';
 import { TodoService } from '../services/todo.service';
 
@@ -9,12 +11,17 @@ import { TodoService } from '../services/todo.service';
 })
 export class AccountsComponent implements OnInit {
   accounts: IAccounts[] = [];
-  constructor(private todoService:TodoService) { }
+  activeAccount!:IAccounts;
+  constructor(private todoService:TodoService, private accountService:AccountService) { }
 
   ngOnInit(): void {
     this.todoService.getAccounts().subscribe(data => {
       this.accounts = data;
     })
+  }
+
+  onSwitchAccount(account:IAccounts){
+    this.accountService.activeAccount$.next(account)
   }
 
 }

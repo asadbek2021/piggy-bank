@@ -16,6 +16,7 @@ import { StatisticComponent } from './statistic/statistic.component';
 import { ObligatoryComponent } from './obligatory/obligatory.component';
 import { AdminComponent } from './admin/admin.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { MycurrencyPipe } from './pipes/mycurrency.pipe';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     ObligatoryComponent,
     AdminComponent,
     SubscriptionComponent,
+    MycurrencyPipe,
   ],
   imports: [
     BrowserModule,

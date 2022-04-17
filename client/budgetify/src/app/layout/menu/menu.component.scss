@@ -25,6 +25,9 @@
       &:hover::after{
         opacity: 1;
       }
+      &.router-link-active::after{
+        opacity: 1;
+      }
 
 
     }
