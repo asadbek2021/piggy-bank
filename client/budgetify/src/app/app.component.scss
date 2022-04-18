@@ -1,8 +1,7 @@
 @use 'src/variables.scss' as var;
 
-.app_wrapper{
+.app__wrapper{
   min-height: 100vh;
   background: var.$base-backgroud;
-
 }
 

@@ -49,6 +49,7 @@ export class TransactionComponent implements OnInit {
 
   onSelect(transaction:ITransaction){
     this.transactionService.selectedTransaction$.next(transaction);
+    this.sidenavService.sidenavContent$.next('transaction-info');
     this.sidenavService.openSideNav();
   }
 }

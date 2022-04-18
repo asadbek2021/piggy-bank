@@ -16,6 +16,7 @@ import { ObligatoryComponent } from '../obligatory/obligatory.component';
 import { AdminComponent } from '../admin/admin.component';
 import { SubscriptionComponent } from '../subscription/subscription.component';
 import { TransactionSelectPipe } from '../pipes/transaction-select.pipe';
+
 const routes: Routes = [
   {
     path: 'main',

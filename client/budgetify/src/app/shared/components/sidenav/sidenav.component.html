@@ -3,7 +3,7 @@
 
   </div>
   <div class="sidenav__aside" [ngClass]="[isOpen ? 'open':'']">
-    <app-transaction-create *ngIf="sidenavContent == 'main' "></app-transaction-create>
-    <app-transaction-info ></app-transaction-info>
+    <app-transaction-create *ngIf="sidenavContent === 'main' "></app-transaction-create>
+    <app-transaction-info *ngIf="sidenavContent === 'transaction-info'"></app-transaction-info>
   </div>
 </div>

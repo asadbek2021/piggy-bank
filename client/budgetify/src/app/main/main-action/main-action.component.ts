@@ -12,7 +12,10 @@ export class MainActionComponent implements OnInit {
 
 
 
-  constructor(private transactionService:TransactionService, private sidenavSercvice: SidenavService) { }
+  constructor(
+    private transactionService:TransactionService,
+    private sidenavService: SidenavService,
+    ) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +25,12 @@ export class MainActionComponent implements OnInit {
   }
 
   onAddTransaction(){
-    this.sidenavSercvice.openSideNav();
+    this.sidenavService.openSideNav();
+  }
+
+  onAddCategory(){
+    this.sidenavService.sidenavContent$.next('category');
+    this.sidenavService.openSideNav();
   }
 
 }

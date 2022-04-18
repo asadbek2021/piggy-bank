@@ -30,7 +30,8 @@ import { MycurrencyPipe } from './pipes/mycurrency.pipe';
     AdminComponent,
     SubscriptionComponent,
     MycurrencyPipe,
-  ],
+    
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

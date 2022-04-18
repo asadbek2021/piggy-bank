@@ -17,8 +17,6 @@ import {MatChipsModule} from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { TransactionInfoComponent } from '../main/transaction/transaction-info/transaction-info.component';
-
-
 @NgModule({
   declarations: [
     SpinnerComponent,
