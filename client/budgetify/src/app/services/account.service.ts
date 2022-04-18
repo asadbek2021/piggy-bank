@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {tap} from 'rxjs/operators'
-import IAccounts from '../todo/models/Accounts';
+import { IAccounts } from '../main/models/Accounts';
 
 @Injectable({
   providedIn: 'root'

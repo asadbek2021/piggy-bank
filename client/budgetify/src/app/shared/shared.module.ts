@@ -12,12 +12,19 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { TransactionCreateComponent } from '../main/transaction/transaction-create/transaction-create.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import { TransactionInfoComponent } from '../main/transaction/transaction-info/transaction-info.component';
 
 
 @NgModule({
   declarations: [
     SpinnerComponent,
-    SidenavComponent
+    SidenavComponent,
+    TransactionCreateComponent,
+    TransactionInfoComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +38,9 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     MatProgressSpinnerModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatChipsModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   exports:[
     MatButtonModule,
@@ -44,6 +54,9 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     SpinnerComponent,
     MatNativeDateModule,
     MatDatepickerModule,
+    SidenavComponent,
+    MatChipsModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

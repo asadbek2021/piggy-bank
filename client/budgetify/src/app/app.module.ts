@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
-import { MainModule } from './todo/todo.module';
+import { MainModule } from './main/main.module';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,7 @@ import { ObligatoryComponent } from './obligatory/obligatory.component';
 import { AdminComponent } from './admin/admin.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { MycurrencyPipe } from './pipes/mycurrency.pipe';
+
 
 
 @NgModule({
@@ -35,11 +36,11 @@ import { MycurrencyPipe } from './pipes/mycurrency.pipe';
     BrowserAnimationsModule,
     AuthModule,
     MainModule,
-    SharedModule,
     AppRoutingModule,
     HttpClientModule,
     MatButtonModule,
-    LayoutModule
+    LayoutModule,
+    SharedModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

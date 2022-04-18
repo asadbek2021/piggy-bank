@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ITransaction } from '../todo/models/Transactions.model';
+import { ITransaction } from '../main/models/Transactions.model';
 
 @Pipe({
   name: 'transactionSelect'

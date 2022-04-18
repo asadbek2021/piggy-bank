@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { AuthService } from './../services/auth.service';
 
 @Component({
@@ -17,11 +18,16 @@ export class AuthFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.spinnerService.hideSpinner();
     localStorage.clear();
   }
 
-  constructor(private authService:AuthService, private router:
-    Router, private snackBar: MatSnackBar) { }
+  constructor(
+    private authService:AuthService,
+    private router:Router,
+    private snackBar: MatSnackBar,
+    private spinnerService:SpinnerService
+    ) { }
 
   onSubmit():void {
    const { email, password } = this.loginForm.value;

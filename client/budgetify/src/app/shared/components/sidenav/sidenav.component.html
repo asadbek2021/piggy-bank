@@ -1,8 +1,9 @@
-<div class="sidenav">
-  <div class="sidenav__backdrop">
+<div class="sidenav" [ngClass]="[isOpen ? 'show':'']">
+  <div class="sidenav__backdrop" (click)="onClose()">
 
   </div>
-  <div class="sidenav__aside">
-    
+  <div class="sidenav__aside" [ngClass]="[isOpen ? 'open':'']">
+    <app-transaction-create *ngIf="sidenavContent == 'main' "></app-transaction-create>
+    <app-transaction-info ></app-transaction-info>
   </div>
 </div>

@@ -14,7 +14,7 @@ const routes:Routes = [
     AuthFormComponent
   ],
   imports: [
-  CommonModule,
+    CommonModule,
     SharedModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
