@@ -1,0 +1,62 @@
+import { NextFunction, Request, Response } from 'express';
+import Account from './account.model';
+
+
+export async function createAccount(req:Request, res: Response,next:NextFunction) {
+  const account = { ...req.body, user_id: req.user ? req.user.id: null };
+  const newAccount = await Account.create(account);
+  res.status(201).json(newAccount);
+}
+
+export async function updateAccount(req:Request, res:Response,next:NextFunction) {
+  const {
+    user_id,
+    title,
+    description,
+    category,
+    currency,
+    availableAmount,
+  } = req.body;
+  const newAccount = {
+    user_id,
+    title,
+    description,
+    category,
+    currency,
+    availableAmount,
+  };
+  const account = await Account.findByIdAndUpdate(req.params.id, newAccount, { new: true });
+  res.status(201).json(account);
+}
+export async function deleteAccount(req:Request, res:Response, next:NextFunction) {
+  try {
+    const { id } = req.params;
+    await Account.findByIdAndDelete(id);
+    res.status(204).json();
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getAccountByUserId(req:Request, res:Response, next:NextFunction) {
+  try {
+    const id:string |null = req.user ? req.user.id: null;
+    if(id){
+      const accounts = await Account.getByUserId(id);
+    res.json(accounts);
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getAccountById(req:Request, res:Response, next:NextFunction) {
+  try {
+    const { id } = req.params;
+    const account = await Account.findById(id);
+    res.json(account);
+  } catch (err) {
+    next(err);
+  }
+}
+

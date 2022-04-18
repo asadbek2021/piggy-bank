@@ -1,0 +1,54 @@
+const SubscriptionRepository = require('./subscription.repository');
+
+export async function getAllSubscriptions(req, res, next) {
+  try {
+    const subscriptions = await SubscriptionRepository.getSubsAll(req.params.accountId);
+    res.json(subscriptions);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getSubscriptionById(req, res, next) {
+  try {
+    const { id } = req.params;
+    const subscription = await SubscriptionRepository.getSubsByID(id);
+    res.json(subscription);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function createSubscription(req, res, next) {
+  try {
+    const subscription = await SubscriptionRepository.createSubs({
+      ...req.body,
+      account_id: req.params.accountId,
+    });
+    res.json(subscription);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function updateSubscription(req, res, next) {
+  try {
+    const { id } = req.params;
+    const subscription = await SubscriptionRepository.editSubs(id, req.body, { new: true });
+    res.json(subscription);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function deleteSubscription(req, res, next) {
+  try {
+    const { id } = req.params;
+    await SubscriptionRepository.removeSubs(id);
+    res.status(204).json();
+  } catch (err) {
+    next(err);
+  }
+}
+
+
