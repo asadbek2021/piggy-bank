@@ -1,4 +1,4 @@
-import { NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import {
   createLogger,
   transports,
@@ -27,7 +27,7 @@ export const logger = createLogger({
 
 export const Logger = function Logger(req:Request, res:Response, next:NextFunction) {
   logger.info(`REQUEST | method: ${req.method},  URL: ${req.url}`);
-  logger.info(`RESPONSE | Status: ${res.status}`);
+  logger.info(`RESPONSE | Status: ${res.statusCode}`);
   next();
 };
 

@@ -1,11 +1,11 @@
-const { Router } = require('express');
-const {
+import { Router } from 'express';
+import {
   getAllObligatory,
   getObligatoryById,
   createObligatory,
   updateObligatory,
-  deleteObligatory,
-} = require('./obligatory.service');
+  deleteObligatory
+} from './obligatory.service';
 
 const router = Router();
 
@@ -19,4 +19,4 @@ router.put('/:id', updateObligatory);
 
 router.delete('/:id', deleteObligatory);
 
-module.exports = router;
+export default router;

@@ -1,12 +1,6 @@
-const { Router } = require('express');
-const {
-  createFaq,
-  deleteFaq,
-  getAllFaqs,
-  updateFaq,
-  getFaqById,
-} = require('./faq.service');
-const auth = require('../../middlewares/authMiddleware');
+import { Router } from 'express';
+import { createFaq, deleteFaq, getAllFaqs, updateFaq, getFaqById } from './faq.service';
+import auth from '../../middlewares/authMiddleware';
 
 const router = Router();
 
@@ -16,4 +10,4 @@ router.post('/', auth, createFaq);
 router.put('/:id', auth, updateFaq);
 router.delete('/:id', auth, deleteFaq);
 
-module.exports = router;
+export default router;

@@ -1,11 +1,5 @@
-const { Router } = require('express');
-const {
-  getAllPiggyBanks,
-  getPiggyBankById,
-  createPiggyBank,
-  updatePiggyBank,
-  crashPiggyBank,
-} = require('./piggy.service');
+import { Router } from 'express';
+import { getAllPiggyBanks, getPiggyBankById, createPiggyBank, updatePiggyBank, crashPiggyBank } from './piggy.service';
 
 const router = Router();
 
@@ -19,4 +13,4 @@ router.put('/:id', updatePiggyBank);
 
 router.delete('/:id', crashPiggyBank);
 
-module.exports = router;
+export default router;

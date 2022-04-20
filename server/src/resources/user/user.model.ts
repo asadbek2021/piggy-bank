@@ -1,6 +1,21 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Model,Document,Query } from 'mongoose';
 
-const userSchema = new Schema({
+interface IUser {
+  email: Schema.Types.ObjectId;
+  password: string;
+  role: string;
+  firstname: string;
+  lastname: string;
+  gender: string;
+  birthday: string;
+  residence: string;
+}
+
+interface UserModel extends Model<IUser> {
+}
+
+
+const userSchema = new Schema<IUser,UserModel>({
   email: {
     type: String,
     required: true,
@@ -31,7 +46,7 @@ const userSchema = new Schema({
     required: true,
   },
   birthday: {
-    type: Date,
+    type: String,
     required: true,
   },
   residence: {
@@ -41,18 +56,8 @@ const userSchema = new Schema({
 
 }, { timestamps: true });
 
-userSchema.methods.sayHi = function greet() {
-  console.log(`Hi, I'm ${this.firstname}`);
-};
-
-userSchema.statics.findByEmail = function findByEmail(email:string) {
-  return this.where({ email: new RegExp(email, 'i') }).exec();
-};
-
-userSchema.query.byName = function byName(name:string) {
-  return this.where({ firstname: new RegExp(name, 'i') });
-};
 
 
 
-module.exports = model('User', userSchema);
+
+module.exports = model<IUser, UserModel>('User', userSchema);

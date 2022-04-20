@@ -1,6 +1,7 @@
-const SubscriptionRepository = require('./subscription.repository');
+import SubscriptionRepository from './subscription.repository';
+import {Request, Response, NextFunction} from 'express';
 
-export async function getAllSubscriptions(req, res, next) {
+export async function getAllSubscriptions(req:Request, res:Response, next:NextFunction) {
   try {
     const subscriptions = await SubscriptionRepository.getSubsAll(req.params.accountId);
     res.json(subscriptions);
@@ -9,7 +10,7 @@ export async function getAllSubscriptions(req, res, next) {
   }
 }
 
-export async function getSubscriptionById(req, res, next) {
+export async function getSubscriptionById(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
     const subscription = await SubscriptionRepository.getSubsByID(id);
@@ -19,7 +20,7 @@ export async function getSubscriptionById(req, res, next) {
   }
 }
 
-export async function createSubscription(req, res, next) {
+export async function createSubscription(req:Request, res:Response, next:NextFunction) {
   try {
     const subscription = await SubscriptionRepository.createSubs({
       ...req.body,
@@ -31,17 +32,17 @@ export async function createSubscription(req, res, next) {
   }
 }
 
-export async function updateSubscription(req, res, next) {
+export async function updateSubscription(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
-    const subscription = await SubscriptionRepository.editSubs(id, req.body, { new: true });
+    const subscription = await SubscriptionRepository.editSubs(id, req.body);
     res.json(subscription);
   } catch (err) {
     next(err);
   }
 }
 
-export async function deleteSubscription(req, res, next) {
+export async function deleteSubscription(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
     await SubscriptionRepository.removeSubs(id);

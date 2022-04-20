@@ -31,7 +31,7 @@ const transactionSchema = new Schema<ITransaction,TransactionModel>({
   },
   description: {
     type: String,
-    default: null,
+    default: '',
   },
   date_of_operation: {
     type: Date,

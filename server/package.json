@@ -4,8 +4,8 @@
   "description": "Web application for Exadel Internship project. It is kinda online bank",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon src/server.ts",
-    "start": "node dist/server.js",
+    "build": "tsc",
+    "start": "nodemon src/server.ts",
     "lint": "eslint --ext .ts src",
     "test": "jest --coverage"
   },

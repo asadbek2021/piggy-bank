@@ -1,6 +1,7 @@
-const Faq = require('./faq.model');
+import { NextFunction, Request, Response } from 'express';
+import Faq from './faq.model';
 
-async function getAllFaqs(req, res, next) {
+export async function getAllFaqs(req: Request, res:Response, next:NextFunction) {
   try {
     const faqs = await Faq.find({}).exec();
     res.json(faqs);
@@ -9,7 +10,7 @@ async function getAllFaqs(req, res, next) {
   }
 }
 
-async function getFaqById(req, res, next) {
+export async function getFaqById(req:Request, res:Response, next:NextFunction) {
   try {
     const faq = await Faq.findById(req.params.id);
     res.json(faq);
@@ -18,7 +19,7 @@ async function getFaqById(req, res, next) {
   }
 }
 
-async function createFaq(req, res, next) {
+export async function createFaq(req:Request, res:Response, next:NextFunction) {
   try {
     const faq = await Faq.create(req.body);
     res.json(faq);
@@ -27,7 +28,7 @@ async function createFaq(req, res, next) {
   }
 }
 
-async function updateFaq(req, res, next) {
+export async function updateFaq(req:Request, res:Response, next:NextFunction) {
   try {
     const faq = await Faq.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(faq);
@@ -36,7 +37,7 @@ async function updateFaq(req, res, next) {
   }
 }
 
-async function deleteFaq(req, res, next) {
+export async function deleteFaq(req:Request, res:Response, next:NextFunction) {
   try {
     await Faq.findByIdAndDelete(req.params.id);
     res.status(204).json();
@@ -45,10 +46,3 @@ async function deleteFaq(req, res, next) {
   }
 }
 
-module.exports = {
-  getAllFaqs,
-  createFaq,
-  updateFaq,
-  deleteFaq,
-  getFaqById,
-};

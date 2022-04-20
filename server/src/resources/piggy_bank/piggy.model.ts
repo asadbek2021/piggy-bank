@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 const subscriptionSchema = new Schema({
   accountId: {
@@ -13,7 +13,7 @@ const subscriptionSchema = new Schema({
   },
   description: {
     type: String,
-    default: null,
+    default: '',
   },
   goal: {
     type: Number,
@@ -26,4 +26,4 @@ const subscriptionSchema = new Schema({
   },
 }, { timestamps: true });
 
-module.exports = model('Piggybank', subscriptionSchema);
+export default model('Piggybank', subscriptionSchema);

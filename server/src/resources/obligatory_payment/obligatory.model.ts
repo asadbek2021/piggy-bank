@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 const ObligatorySchema = new Schema({
   userId: {
@@ -32,4 +32,4 @@ const ObligatorySchema = new Schema({
   },
 }, { timestamps: true });
 
-module.exports = model('Obligatory', ObligatorySchema);
+export default model('Obligatory', ObligatorySchema);

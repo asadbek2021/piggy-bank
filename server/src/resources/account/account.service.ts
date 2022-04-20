@@ -3,7 +3,8 @@ import Account from './account.model';
 
 
 export async function createAccount(req:Request, res: Response,next:NextFunction) {
-  const account = { ...req.body, user_id: req.user ? req.user.id: null };
+  const {id}:{id:string} |any = req.user;
+  const account = { ...req.body, user_id: id};
   const newAccount = await Account.create(account);
   res.status(201).json(newAccount);
 }
@@ -40,13 +41,11 @@ export async function deleteAccount(req:Request, res:Response, next:NextFunction
 
 export async function getAccountByUserId(req:Request, res:Response, next:NextFunction) {
   try {
-    const id:string |null = req.user ? req.user.id: null;
-    if(id){
+    const {id}:{id:string} | any = req.user;
       const accounts = await Account.getByUserId(id);
     res.json(accounts);
-    }
-  } catch (err) {
-    next(err);
+    } catch (err) {
+     next(err);
   }
 }
 

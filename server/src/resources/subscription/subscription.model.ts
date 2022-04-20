@@ -1,6 +1,24 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model, Model } from 'mongoose';
 
-const subscriptionSchema = new Schema({
+export interface ISubsription {
+  account_id: Schema.Types.ObjectId;
+  title: string;
+  description: string;
+  type: string;
+  amount: number;
+  first_day_payment: string;
+  last_day_payment: string;
+  frequency: number;
+  category:string;
+  currency:string;
+  day_of_payment:string;
+}
+
+interface SubscriptionModel extends Model<ISubsription> {
+
+}
+
+const subscriptionSchema = new Schema<ISubsription,SubscriptionModel>({
   account_id: {
     type: Schema.Types.ObjectId,
     required: true,
@@ -11,18 +29,18 @@ const subscriptionSchema = new Schema({
   },
   description: {
     type: String,
-    default: 'Description',
+    default: '',
   },
   first_day_payment: {
-    type: Date,
+    type: String,
     required: true,
   },
   last_day_payment: {
-    type: Date,
+    type: String,
     required: true,
   },
   day_of_payment: {
-    type: Date,
+    type: String,
     required: true,
   },
   category: {
@@ -37,6 +55,6 @@ const subscriptionSchema = new Schema({
     type: String,
     required: true,
   },
-}, { timestamp: true });
+}, { timestamps: true });
 
-module.exports = model('Subscription', subscriptionSchema);
+export default model<ISubsription, SubscriptionModel>('Subscription', subscriptionSchema);

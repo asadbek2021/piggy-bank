@@ -1,6 +1,7 @@
-const Obligatory = require('./obligatory.model');
+import { NextFunction, Request, Response } from 'express';
+import Obligatory from './obligatory.model';
 
-async function getAllObligatory(req, res, next) {
+export async function getAllObligatory(req:Request, res:Response, next:NextFunction) {
   try {
     const obligatories = await Obligatory.find({});
     res.json(obligatories);
@@ -8,7 +9,7 @@ async function getAllObligatory(req, res, next) {
     next(err);
   }
 }
-async function getObligatoryById(req, res, next) {
+export async function getObligatoryById(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
     const obligatory = await Obligatory.findById(id);
@@ -17,15 +18,16 @@ async function getObligatoryById(req, res, next) {
     next(err);
   }
 }
-async function createObligatory(req, res, next) {
+export async function createObligatory(req:Request, res:Response, next:NextFunction) {
   try {
-    const obligatory = await Obligatory.create({ ...req.body, userId: req.user.id });
+    const {id}:{id:string} | any = req.user;
+    const obligatory = await Obligatory.create({ ...req.body, userId:id });
     res.json(obligatory);
   } catch (err) {
     next(err);
   }
 }
-async function updateObligatory(req, res, next) {
+export async function updateObligatory(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
     const obligatory = await Obligatory.findByIdAndUpdate(id, req.body, { new: true });
@@ -34,7 +36,7 @@ async function updateObligatory(req, res, next) {
     next(err);
   }
 }
-async function deleteObligatory(req, res, next) {
+export async function deleteObligatory(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
     await Obligatory.findByIdAndDelete(id);
@@ -44,10 +46,3 @@ async function deleteObligatory(req, res, next) {
   }
 }
 
-module.exports = {
-  getAllObligatory,
-  getObligatoryById,
-  createObligatory,
-  updateObligatory,
-  deleteObligatory,
-};

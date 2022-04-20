@@ -1,6 +1,7 @@
-const PiggyBank = require('./piggy.model');
+import { NextFunction, Request, Response } from 'express';
+import PiggyBank from './piggy.model';
 
-async function getAllPiggyBanks(req, res, next) {
+export async function getAllPiggyBanks(req:Request, res:Response, next:NextFunction) {
   try {
     const { accountId } = req.params;
     const piggyBanks = await PiggyBank.find({ accountId });
@@ -10,7 +11,7 @@ async function getAllPiggyBanks(req, res, next) {
   }
 }
 
-async function getPiggyBankById(req, res, next) {
+export async function getPiggyBankById(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
     const piggybank = await PiggyBank.findById(id);
@@ -20,7 +21,7 @@ async function getPiggyBankById(req, res, next) {
   }
 }
 
-async function createPiggyBank(req, res, next) {
+export async function createPiggyBank(req:Request, res:Response, next:NextFunction) {
   try {
     const piggybank = await PiggyBank.create({ ...req.body, accountId: req.params.accountId });
     res.json(piggybank);
@@ -29,7 +30,7 @@ async function createPiggyBank(req, res, next) {
   }
 }
 
-async function updatePiggyBank(req, res, next) {
+export async function updatePiggyBank(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
     const piggybank = await PiggyBank.findByIdAndUpdate(id, req.body, { new: true });
@@ -39,7 +40,7 @@ async function updatePiggyBank(req, res, next) {
   }
 }
 
-async function crashPiggyBank(req, res, next) {
+export async function crashPiggyBank(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
     await PiggyBank.findByIdAndDelete(id);
@@ -49,10 +50,3 @@ async function crashPiggyBank(req, res, next) {
   }
 }
 
-module.exports = {
-  getAllPiggyBanks,
-  getPiggyBankById,
-  createPiggyBank,
-  updatePiggyBank,
-  crashPiggyBank,
-};

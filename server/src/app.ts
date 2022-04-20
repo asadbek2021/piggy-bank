@@ -18,10 +18,10 @@ import obligatoryRouter from './resources/obligatory_payment/obligatory.router';
 import faqRouter from './resources/faq/faq.router';
 import piggyBankRouter from './resources/piggy_bank/piggy.router';
 import { jwtCallback } from './resources/auth/auth.repository';
-import db from './loader/dbconnect';
+import {connect} from './loader/dbconnect';
 import auth from './middlewares/authMiddleware';
 
-db.connect();
+connect();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

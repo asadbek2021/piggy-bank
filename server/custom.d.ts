@@ -1,6 +1,6 @@
 interface IUserBody {
     id:string,
-    email?:string
+    email:string
 }
 declare namespace Express {
     export interface Request {

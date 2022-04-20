@@ -4,7 +4,7 @@ interface IAccount {
   user_id: Schema.Types.ObjectId;
   currency: string;
   title: string;
-  description: string;
+  description?: string;
   type: string;
   balance: number;
 }
@@ -25,7 +25,6 @@ const accountSchema = new Schema<IAccount,AccountModel>({
   },
   description: {
     type: String,
-    required: true,
     default: '',
   },
   currency: {

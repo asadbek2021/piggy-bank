@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 const faqSchema = new Schema({
   question: {
@@ -11,4 +11,4 @@ const faqSchema = new Schema({
   },
 }, { timestamps: true });
 
-module.exports = model('Faq', faqSchema);
+export default model('Faq', faqSchema);

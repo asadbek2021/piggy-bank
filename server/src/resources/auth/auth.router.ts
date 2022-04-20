@@ -1,8 +1,8 @@
-const { Router } = require('express');
-const { check } = require('express-validator');
+import { Router } from 'express';
+import { check } from 'express-validator';
 
 const router = Router();
-const { registerUser, loginUser } = require('./auth.service');
+import { registerUser, loginUser } from './auth.service';
 
 router.post('/login', [
   check('email', 'Your email is not valid.').isEmail(),
@@ -18,4 +18,4 @@ router.post('/register', [
   check('role', 'You can choose only one of these roles: ADMIN or USER').isIn(['ADMIN', 'USER']),
 ], registerUser);
 
-module.exports = router;
+export default router;
