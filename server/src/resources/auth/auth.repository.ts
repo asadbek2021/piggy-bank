@@ -1,8 +1,7 @@
 import { JwtPayload } from "jsonwebtoken";
 
-const bcrypt = require('bcrypt');
-const uuid = require('uuid').v4;
-const User = require('../user/user.model');
+import bcrypt from 'bcrypt';
+import User from '../user/user.model';
 
 interface IUser {
   email: string,
@@ -34,7 +33,6 @@ export async function register(user:IUser) {
 
   const hashed = await bcrypt.hashSync(password, 10);
   const newUser = await User.create({
-    id: uuid(),
     email,
     role,
     firstname,

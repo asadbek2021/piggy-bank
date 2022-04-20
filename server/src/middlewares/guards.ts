@@ -1,6 +1,6 @@
-import { NextFunction, request, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
-const User = require('../resources/user/user.model');
+import User from '../resources/user/user.model';
 
 const addGuard = async function guard(req:Request, res:Response, next:NextFunction) {
   if(req.user){

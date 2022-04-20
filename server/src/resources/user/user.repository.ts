@@ -1,4 +1,4 @@
-const User = require('./user.model');
+import User from './user.model';
 
 interface IUserBody{
   email: string;
