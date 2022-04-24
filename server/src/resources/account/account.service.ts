@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import Transaction from '../transaction/transaction.model';
 import Account from './account.model';
 
 
@@ -29,10 +30,12 @@ export async function updateAccount(req:Request, res:Response,next:NextFunction)
   const account = await Account.findByIdAndUpdate(req.params.id, newAccount, { new: true });
   res.status(201).json(account);
 }
+
 export async function deleteAccount(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
     await Account.findByIdAndDelete(id);
+    await Transaction.findOneAndDelete({ account_id: id });
     res.status(204).json();
   } catch (err) {
     next(err);

@@ -5,28 +5,29 @@ import { SidenavService } from '../../services/sidenav.service';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss']
+  styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit, OnDestroy {
   isOpen = false;
-  sidenavContent!:string;
-  sidenavContentSubs!:Subscription;
-  constructor(private sidenavService:SidenavService) { }
+  sidenavContent!: string;
+  sidenavContentSubs!: Subscription;
+  constructor(private sidenavService: SidenavService) {}
   ngOnInit(): void {
-    this.sidenavService.isShown$.subscribe(value=>{
+    this.sidenavContentSubs = this.sidenavService.sidenavContent$.subscribe(
+      (value) => {
+        this.sidenavContent = value;
+      }
+    );
+    this.sidenavService.isShown$.subscribe((value) => {
       this.isOpen = value;
-    })
-   this.sidenavContentSubs = this.sidenavService.sidenavContent$.subscribe(value=>{
-      this.sidenavContent = value;
-    })
+    });
   }
 
   ngOnDestroy(): void {
     this.sidenavContentSubs.unsubscribe();
   }
 
-  onClose(){
+  onClose() {
     this.sidenavService.closeSideNav();
   }
-
 }

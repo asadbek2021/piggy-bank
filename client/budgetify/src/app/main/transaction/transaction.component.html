@@ -10,8 +10,8 @@
       <mat-card-title class="transaction__title"> {{transaction.title}}</mat-card-title>
       <div class="transaction__info">
         <span class="transaction__type">
-          <span class="transaction__type-icon" [ngClass]="transaction.type == 'expense' ? 'expense': 'income'">
-            <mat-icon>{{transaction.type == 'expense' ? 'arrow_upward': 'arrow_downward' }}</mat-icon>
+          <span class="transaction__type-icon" [ngClass]="transaction.type === 'expense' ? 'expense': 'income'">
+            <mat-icon>{{transaction.type === 'expense' ? 'arrow_upward': 'arrow_downward' }}</mat-icon>
           </span>
         </span>
         <span class="transaction__info-detail">
@@ -25,7 +25,7 @@
     </div>
 
     <div  class="transaction__price" >
-     <p [ngClass]="transaction.type == 'expense' ? 'expense': 'income' ">
+     <p [ngClass]="transaction.type === 'expense' ? 'expense': 'income' ">
        {{transaction.amount | currency:'USD'}}
       </p>
     </div>

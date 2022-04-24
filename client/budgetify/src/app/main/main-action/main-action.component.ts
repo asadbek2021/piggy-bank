@@ -1,36 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SidenavService } from 'src/app/shared/services/sidenav.service';
 import { TransactionService } from '../services/transaction.service';
 
 @Component({
   selector: 'app-main-action',
   templateUrl: './main-action.component.html',
-  styleUrls: ['./main-action.component.scss']
+  styleUrls: ['./main-action.component.scss'],
 })
-
-export class MainActionComponent implements OnInit {
-
-
-
+export class MainActionComponent  {
   constructor(
-    private transactionService:TransactionService,
-    private sidenavService: SidenavService,
-    ) { }
+    private transactionService: TransactionService,
+    private sidenavService: SidenavService
+  ) {}
 
-  ngOnInit(): void {
-  }
-
-  onSelect(type:string) {
+  onSelect(type: string) {
     this.transactionService.selectedType$.next(type);
   }
 
-  onAddTransaction(){
+  onAddTransaction() {
+    this.sidenavService.sidenavContent$.next('main');
     this.sidenavService.openSideNav();
   }
 
-  onAddCategory(){
+  onAddCategory() {
     this.sidenavService.sidenavContent$.next('category');
     this.sidenavService.openSideNav();
   }
-
 }

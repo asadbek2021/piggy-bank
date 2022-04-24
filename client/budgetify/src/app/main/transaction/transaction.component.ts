@@ -12,42 +12,43 @@ import { TransactionService } from '../services/transaction.service';
   styleUrls: ['./transaction.component.scss'],
 })
 export class TransactionComponent implements OnInit {
-  accountSubs!:Subscription;
+  accountSubs!: Subscription;
   transactions?: Array<ITransaction>;
   transactionSubs?: Subscription;
-  transactionSelType!:string;
-  transactionSelTypeSubs!:Subscription;
+  transactionSelType!: string;
+  transactionSelTypeSubs!: Subscription;
   constructor(
     private transactionService: TransactionService,
     private spinnerService: SpinnerService,
-    private accountService:AccountService,
-    private sidenavService:SidenavService
-    ) {}
+    private accountService: AccountService,
+    private sidenavService: SidenavService
+  ) {}
 
   ngOnInit(): void {
-    this.accountSubs =this.accountService.activeAccount$.subscribe(account=>{
-      this.spinnerService.showSpinner();
-      this.transactionSubs = this.transactionService
-      .getTransactions(account._id)
-      .subscribe((value: ITransaction[]) => {
-        this.transactions = value;
-      this.spinnerService.hideSpinner();
+    this.accountSubs = this.accountService.activeAccount$.subscribe(
+      (account) => {
+        this.spinnerService.showSpinner();
+        this.transactionSubs = this.transactionService
+          .getTransactions(account._id)
+          .subscribe((value: ITransaction[]) => {
+            this.transactions = value;
+            this.spinnerService.hideSpinner();
+          });
+      }
+    );
+    this.transactionSelTypeSubs =
+      this.transactionService.selectedType$.subscribe((type) => {
+        this.transactionSelType = type;
       });
-    })
-    this.transactionSelTypeSubs = this.transactionService.selectedType$.subscribe(type=>{
-      this.transactionSelType = type;
-    })
-
   }
 
   ngOnDestroy(): void {
-    this.accountSubs.unsubscribe()
-    this.transactionSubs?.unsubscribe()
-    this.transactionSelTypeSubs.unsubscribe()
+    this.accountSubs.unsubscribe();
+    this.transactionSubs?.unsubscribe();
+    this.transactionSelTypeSubs.unsubscribe();
   }
 
-
-  onSelect(transaction:ITransaction){
+  onSelect(transaction: ITransaction) {
     this.transactionService.selectedTransaction$.next(transaction);
     this.sidenavService.sidenavContent$.next('transaction-info');
     this.sidenavService.openSideNav();

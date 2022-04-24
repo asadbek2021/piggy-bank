@@ -7,23 +7,24 @@ import { TransactionService } from '../../services/transaction.service';
 @Component({
   selector: 'app-transaction-info',
   templateUrl: './transaction-info.component.html',
-  styleUrls: ['./transaction-info.component.scss']
+  styleUrls: ['./transaction-info.component.scss'],
 })
 export class TransactionInfoComponent implements OnInit, OnDestroy {
-  transaction!:ITransaction;
-  transactionSubs!:Subscription;
-  constructor(private transactionService:TransactionService, private sidenavService:SidenavService) { }
+  transaction!: ITransaction;
+  transactionSubs!: Subscription;
+  constructor(
+    private transactionService: TransactionService,
+    private sidenavService: SidenavService
+  ) {}
 
   ngOnInit(): void {
-   this.transactionSubs = this.transactionService.selectedTransaction$.subscribe(transaction=>{
-     console.log(transaction);
-      this.transaction = transaction;
-      this.transactionService.selectedType$.next('main-info');
-    })
+    this.transactionSubs =
+      this.transactionService.selectedTransaction$.subscribe((transaction) => {
+        this.transaction = transaction;
+      });
   }
 
   ngOnDestroy(): void {
     this.transactionSubs.unsubscribe();
   }
-
 }

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-const Category = require('./category.model');
+import Category from './category.model';
 
 export async function getAllCategories(req:Request, res:Response, next:NextFunction) {
   try {
