@@ -18,8 +18,6 @@ import { AdminComponent } from './admin/admin.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { MycurrencyPipe } from './pipes/mycurrency.pipe';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,8 +28,7 @@ import { MycurrencyPipe } from './pipes/mycurrency.pipe';
     AdminComponent,
     SubscriptionComponent,
     MycurrencyPipe,
-    
-    ],
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -43,12 +40,13 @@ import { MycurrencyPipe } from './pipes/mycurrency.pipe';
     LayoutModule,
     SharedModule,
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
-  bootstrap: [ AppComponent ]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

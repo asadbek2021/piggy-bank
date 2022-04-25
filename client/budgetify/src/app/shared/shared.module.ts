@@ -13,16 +13,16 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { TransactionCreateComponent } from '../main/transaction/transaction-create/transaction-create.component';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { TransactionInfoComponent } from '../main/transaction/transaction-info/transaction-info.component';
 @NgModule({
   declarations: [
     SpinnerComponent,
     SidenavComponent,
     TransactionCreateComponent,
-    TransactionInfoComponent
+    TransactionInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -38,9 +38,9 @@ import { TransactionInfoComponent } from '../main/transaction/transaction-info/t
     MatDatepickerModule,
     MatChipsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
   ],
-  exports:[
+  exports: [
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
@@ -54,7 +54,7 @@ import { TransactionInfoComponent } from '../main/transaction/transaction-info/t
     MatDatepickerModule,
     SidenavComponent,
     MatChipsModule,
-    MatSelectModule
-  ]
+    MatSelectModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

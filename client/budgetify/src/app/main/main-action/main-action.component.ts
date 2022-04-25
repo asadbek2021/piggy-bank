@@ -7,7 +7,7 @@ import { TransactionService } from '../services/transaction.service';
   templateUrl: './main-action.component.html',
   styleUrls: ['./main-action.component.scss'],
 })
-export class MainActionComponent  {
+export class MainActionComponent {
   constructor(
     private transactionService: TransactionService,
     private sidenavService: SidenavService

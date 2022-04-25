@@ -16,6 +16,9 @@ import { ObligatoryComponent } from '../obligatory/obligatory.component';
 import { AdminComponent } from '../admin/admin.component';
 import { SubscriptionComponent } from '../subscription/subscription.component';
 import { TransactionSelectPipe } from '../pipes/transaction-select.pipe';
+import { SearchPipe } from '../pipes/search.pipe';
+import { SortByPipe } from '../pipes/sort-by.pipe';
+import { AccountCreateComponent } from './accounts/account-create/account-create.component';
 
 const routes: Routes = [
   {
@@ -58,6 +61,9 @@ const routes: Routes = [
     SearchComponent,
     AccountsComponent,
     TransactionSelectPipe,
+    SearchPipe,
+    SortByPipe,
+    AccountCreateComponent,
   ],
   imports: [
     CommonModule,
@@ -65,8 +71,7 @@ const routes: Routes = [
     SharedModule,
     ReactiveFormsModule,
   ],
-  exports: [
-  ],
+  exports: [SearchComponent],
   providers: [TransactionService],
 })
 export class MainModule {}

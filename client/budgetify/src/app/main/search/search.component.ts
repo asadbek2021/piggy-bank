@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { TransactionService } from '../services/transaction.service';
@@ -6,8 +6,12 @@ import { TransactionService } from '../services/transaction.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent  {
+export class SearchComponent {
+  @Output() searchValue = new EventEmitter<string>();
 
+  onInput(value: string) {
+    this.searchValue.emit(value);
+  }
 }

@@ -12,6 +12,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { SidenavService } from 'src/app/shared/services/sidenav.service';
 import { IAccounts } from '../../models/Accounts';
 import { ICategory } from '../../models/Category.model';
+import { ITransaction } from '../../models/Transactions.model';
 import { TransactionService } from '../../services/transaction.service';
 
 @Component({
@@ -58,7 +59,14 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.transactionService.createTransaction(this.transactionForm.value);
+    this.transactionService
+      .createTransaction(this.transactionForm.value)
+      .subscribe((data: ITransaction) => {
+        const transactions = this.transactionService.transactions;
+        transactions.push(data);
+        this.transactionService.transactions$.next(transactions);
+        this.onCloseSidenav();
+      });
   }
   onSetValue(type: string) {
     this.currentType = type;

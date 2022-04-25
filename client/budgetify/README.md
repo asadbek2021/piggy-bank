@@ -1,4 +1,4 @@
-# TodoList
+# Budgetify
 
 ## To start with angular
  ```npm i -g @angular/cli```

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
 import { SidenavService } from 'src/app/shared/services/sidenav.service';
@@ -11,12 +11,15 @@ import { TransactionService } from '../services/transaction.service';
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss'],
 })
-export class TransactionComponent implements OnInit {
+export class TransactionComponent implements OnInit, OnDestroy {
   accountSubs!: Subscription;
   transactions?: Array<ITransaction>;
   transactionSubs?: Subscription;
   transactionSelType!: string;
   transactionSelTypeSubs!: Subscription;
+  transactionUpdate!: Subscription;
+  searchValue!: string;
+  switchSortByDate: boolean = false;
   constructor(
     private transactionService: TransactionService,
     private spinnerService: SpinnerService,
@@ -40,12 +43,21 @@ export class TransactionComponent implements OnInit {
       this.transactionService.selectedType$.subscribe((type) => {
         this.transactionSelType = type;
       });
+    this.transactionUpdate = this.transactionService.transactions$.subscribe(
+      (transactions) => {
+        this.transactions = transactions;
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.accountSubs.unsubscribe();
     this.transactionSubs?.unsubscribe();
     this.transactionSelTypeSubs.unsubscribe();
+  }
+
+  onSearch(value:string){
+    this.searchValue = value;
   }
 
   onSelect(transaction: ITransaction) {

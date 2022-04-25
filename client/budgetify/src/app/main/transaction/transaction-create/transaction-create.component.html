@@ -6,15 +6,16 @@
       <div class="transaction__top-type">
         <input type="text" class="hidden-type" name="type" formControlName="type" #type>
        <div class="type-actions">
-        <button type="button"  class="btn" (click)="onSetValue('expense')" [ngClass]="[currentType =='income' ? 'not-active':'']">
+        <button type="button"  class="btn" (click)="onSetValue('expense')" [ngClass]="[currentType ==='income' ? 'not-active':'']">
           <span class="label expense"><mat-icon>arrow_upward</mat-icon></span>
           <span class="type-text">Expense</span>
         </button>
-        <button type="button"  class="btn" (click)="onSetValue('income')" [ngClass]="[currentType =='expense' ? 'not-active':'']">
+        <button type="button"  class="btn" (click)="onSetValue('income')" [ngClass]="[currentType ==='expense' ? 'not-active':'']">
           <span class="label income"><mat-icon>arrow_downward</mat-icon></span>
           <span class="type-text">Income</span>
         </button>
        </div>
+       <p style="color:red" *ngIf="!currentType && type.classList.contains('touched')">Type is required</p>
       </div>
       <div class="transaction__form">
         <mat-form-field appearance="outline">
@@ -58,7 +59,7 @@
 
   <div class="transaction__bottom">
     <button class="btn btn-cancel" type="button" (click)="onCancel()">Cancel</button>
-    <button mat-raised-button class="btn btn-save" type="submit" >Save</button>
+    <button mat-raised-button class="btn btn-save" [disabled]="transactionForm.invalid" type="submit" >Save</button>
   </div>
   </form>
 
