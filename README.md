@@ -7,5 +7,5 @@
  
 then
  ```
- git checkout angular_start
+ git checkout angular_test
  ```
