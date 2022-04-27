@@ -7,6 +7,7 @@ interface IAccount {
   description?: string;
   type: string;
   balance: number;
+  sign: string;
 }
 
 interface AccountModel extends Model<IAccount> {
@@ -35,7 +36,8 @@ const accountSchema = new Schema<IAccount,AccountModel>({
     type: Number,
     required: true,
     default: 0,
-  }
+  },
+  sign: String
 }, { timestamps: true });
 
 accountSchema.statics.getByUserId = function getById(user_id) {

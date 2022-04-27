@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import Transaction from '../transaction/transaction.model';
 import Account from './account.model';
-
+import Currency from 'currency-formatter';
 
 export async function createAccount(req:Request, res: Response,next:NextFunction) {
   const {id}:{id:string} |any = req.user;
   const account = { ...req.body, user_id: id};
+  account.sign = Currency.findCurrency(account.currency);
   const newAccount = await Account.create(account);
   res.status(201).json(newAccount);
 }

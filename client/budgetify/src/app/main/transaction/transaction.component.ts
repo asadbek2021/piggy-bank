@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
 import { SidenavService } from 'src/app/shared/services/sidenav.service';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
+import { IAccounts } from '../models/Accounts';
 import { ITransaction } from '../models/Transactions.model';
 import { TransactionService } from '../services/transaction.service';
 
@@ -13,6 +14,7 @@ import { TransactionService } from '../services/transaction.service';
 })
 export class TransactionComponent implements OnInit, OnDestroy {
   accountSubs!: Subscription;
+  account!: IAccounts;
   transactions?: Array<ITransaction>;
   transactionSubs?: Subscription;
   transactionSelType!: string;
@@ -31,6 +33,10 @@ export class TransactionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.accountSubs = this.accountService.activeAccount$.subscribe(
       (account) => {
+        this.account = account;
+        if(!account){
+          return;
+        }
         this.spinnerService.showSpinner();
         this.currency = account.currency;
         this.transactionSubs = this.transactionService

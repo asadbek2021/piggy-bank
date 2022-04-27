@@ -22,6 +22,7 @@ export class AccountsComponent implements OnInit {
   ngOnInit(): void {
     this.transactionService.getAccounts().subscribe((data) => {
       this.accounts = data;
+      console.log(data);
       this.activeAccount = this.accounts[0];
     });
   }

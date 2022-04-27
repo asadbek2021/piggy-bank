@@ -33,6 +33,7 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
   @ViewChild('categoryInput') categoryInput!: ElementRef<HTMLInputElement>;
   @ViewChild('type') type?: ElementRef;
   categories: string[] = [];
+  account!: IAccounts;
   currentType!: string;
   categoriesSubs!: Subscription;
   currentAccount!: IAccounts;
@@ -64,6 +65,10 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.accountService.activeAccount$.subscribe((account) => {
+      this.account = account;
+      if (!account) {
+        return;
+      }
       this.transactionForm.get('accountId')?.setValue(account._id);
     });
     this.categoriesSubs = this.categoryService
@@ -78,12 +83,19 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    if (!this.account) {
+      this.snackBar.open('You should create account first!', 'Close', {
+        duration: 1000,
+        verticalPosition: 'top',
+      });
+      this.onCloseSidenav();
+      return;
+    }
     delete this.transactionForm.value.categories;
     this.transactionForm.setValue({
       categories: this.categories,
       ...this.transactionForm.value,
     });
-    console.log(this.transactionForm.value);
     this.transactionService
       .createTransaction(
         this.transactionForm.value,

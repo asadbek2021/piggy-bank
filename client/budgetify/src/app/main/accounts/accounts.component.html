@@ -1,4 +1,5 @@
 <div class="accounts__wrapper">
+  <p *ngIf="!accounts.length">No accounts</p>
   <mat-card class="account"
    *ngFor="let account of accounts; let i = index"
    (click)="onSwitchAccount(account)"
