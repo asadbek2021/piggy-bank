@@ -37,7 +37,10 @@ const accountSchema = new Schema<IAccount,AccountModel>({
     required: true,
     default: 0,
   },
-  sign: String
+  sign: {
+    type: String,
+    required: true
+  }
 }, { timestamps: true });
 
 accountSchema.statics.getByUserId = function getById(user_id) {

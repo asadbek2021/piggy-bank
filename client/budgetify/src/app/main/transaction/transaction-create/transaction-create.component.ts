@@ -64,7 +64,11 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.accountService.getAccounts().subscribe((data) => {
+    this.account = data[0];
+  });
     this.accountService.activeAccount$.subscribe((account) => {
+      console.log( this.account);
       this.account = account;
       if (!account) {
         return;

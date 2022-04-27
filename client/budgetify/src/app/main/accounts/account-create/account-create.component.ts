@@ -41,15 +41,19 @@ export class AccountCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.addAccountForm.value);
     this.accountService
       .addAccount(this.addAccountForm.value)
       .subscribe((account: IAccounts) => {
+         this.accountService.getAccounts().subscribe(accounts=>{
+          this.accountService.accounts$.next(accounts);
+        });
+       
         this.snackBar.open(
           `The account ${account.title} was successfully created`,
           'Close',
           { verticalPosition: 'top', politeness: 'polite' }
         );
       });
+     
   }
 }

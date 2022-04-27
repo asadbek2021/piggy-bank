@@ -6,7 +6,7 @@ import Currency from 'currency-formatter';
 export async function createAccount(req:Request, res: Response,next:NextFunction) {
   const {id}:{id:string} |any = req.user;
   const account = { ...req.body, user_id: id};
-  account.sign = Currency.findCurrency(account.currency);
+  account.sign = Currency.findCurrency(account.currency)?.symbol;
   const newAccount = await Account.create(account);
   res.status(201).json(newAccount);
 }
