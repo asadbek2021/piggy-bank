@@ -1,20 +1,15 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  constructor(private authService: AuthService) {}
 
-
-  @Output() sideNavToggle: EventEmitter<any>= new  EventEmitter();
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  toggleMenu():void {
-    this.sideNavToggle.emit();
+  onLogout() {
+    this.authService.logout();
   }
 }
