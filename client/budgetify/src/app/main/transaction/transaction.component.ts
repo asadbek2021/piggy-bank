@@ -34,11 +34,11 @@ export class TransactionComponent implements OnInit, OnDestroy {
     this.accountSubs = this.accountService.activeAccount$.subscribe(
       (account) => {
         this.account = account;
+        this.currency = account.currency;
         if(!account){
           return;
         }
         this.spinnerService.showSpinner();
-        this.currency = account.currency;
         this.transactionSubs = this.transactionService
           .getTransactions(account._id)
           .subscribe((value: ITransaction[]) => {
