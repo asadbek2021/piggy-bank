@@ -19,6 +19,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
   transactionSelTypeSubs!: Subscription;
   transactionUpdate!: Subscription;
   searchValue!: string;
+  currency!: string;
   switchSortByDate: boolean = false;
   constructor(
     private transactionService: TransactionService,
@@ -31,6 +32,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
     this.accountSubs = this.accountService.activeAccount$.subscribe(
       (account) => {
         this.spinnerService.showSpinner();
+        this.currency = account.currency;
         this.transactionSubs = this.transactionService
           .getTransactions(account._id)
           .subscribe((value: ITransaction[]) => {
@@ -56,12 +58,13 @@ export class TransactionComponent implements OnInit, OnDestroy {
     this.transactionSelTypeSubs.unsubscribe();
   }
 
-  onSearch(value:string){
+  onSearch(value: string) {
     this.searchValue = value;
   }
 
   onSelect(transaction: ITransaction) {
     this.transactionService.selectedTransaction$.next(transaction);
+    this.transactionService.selectedTransaction = transaction;
     this.sidenavService.sidenavContent$.next('transaction-info');
     this.sidenavService.openSideNav();
   }

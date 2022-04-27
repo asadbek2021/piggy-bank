@@ -1,5 +1,5 @@
 export interface ITransaction {
-  id: string;
+  _id: string;
   type: string;
   accountId: string;
   title: string;

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { IAccounts } from '../main/models/Accounts';
 
 @Injectable({
@@ -24,5 +24,19 @@ export class AccountService {
         this.accounts$.next([...this.accounts]);
       })
     );
+  }
+
+  getCurrencies() {
+    return this.http.get(`${this.baseUrl}/currency`).pipe(
+      map((values: any) => {
+        return values.map((c: { code: string; symbol: string }) => {
+          return { code: c.code, sign: c.symbol };
+        });
+      })
+    );
+  }
+
+  addAccount(account: Partial<IAccounts>) {
+    return this.http.post<IAccounts>(`${this.baseUrl}/account/`, account);
   }
 }

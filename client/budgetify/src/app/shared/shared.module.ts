@@ -17,12 +17,24 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { TransactionInfoComponent } from '../main/transaction/transaction-info/transaction-info.component';
+import { AccountInfoComponent } from '../main/accounts/account-info/account-info.component';
+import { AccountCreateComponent } from '../main/accounts/account-create/account-create.component';
+import { CategoryCreateComponent } from '../category/category-create/category-create.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogExampleComponent } from './components/dialog-example/dialog-example.component';
+
 @NgModule({
   declarations: [
     SpinnerComponent,
     SidenavComponent,
     TransactionCreateComponent,
     TransactionInfoComponent,
+    AccountInfoComponent,
+    AccountCreateComponent,
+    CategoryCreateComponent,
+    DialogExampleComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +51,9 @@ import { TransactionInfoComponent } from '../main/transaction/transaction-info/t
     MatChipsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatAutocompleteModule,
+    MatMenuModule,
+    MatDialogModule,
   ],
   exports: [
     MatButtonModule,
@@ -55,6 +70,13 @@ import { TransactionInfoComponent } from '../main/transaction/transaction-info/t
     SidenavComponent,
     MatChipsModule,
     MatSelectModule,
+    AccountInfoComponent,
+    AccountCreateComponent,
+    CategoryCreateComponent,
+    MatAutocompleteModule,
+    MatMenuModule,
+    MatDialogModule,
+    DialogExampleComponent,
   ],
 })
 export class SharedModule {}

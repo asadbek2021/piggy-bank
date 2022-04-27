@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
+import { SidenavService } from 'src/app/shared/services/sidenav.service';
 import { IAccounts } from '../models/Accounts';
 import { TransactionService } from '../services/transaction.service';
 
@@ -14,7 +15,8 @@ export class AccountsComponent implements OnInit {
   activeAccount!: IAccounts;
   constructor(
     private transactionService: TransactionService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private sidenavService: SidenavService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +27,16 @@ export class AccountsComponent implements OnInit {
   }
 
   onSwitchAccount(account: IAccounts) {
+    if (account._id === this.activeAccount._id) {
+      this.onDetail();
+      return;
+    }
     this.accountService.activeAccount$.next(account);
     this.activeAccount = account;
+  }
+
+  onDetail() {
+    this.sidenavService.sidenavContent$.next('account-info');
+    this.sidenavService.openSideNav();
   }
 }

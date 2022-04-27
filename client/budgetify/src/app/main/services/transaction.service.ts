@@ -10,7 +10,7 @@ import { ITransaction } from '../models/Transactions.model';
 })
 export class TransactionService {
   private baseUrl = 'http://localhost:3000/transaction';
-
+  selectedTransaction!: ITransaction;
   selectedType$ = new Subject<string>();
   selectedTransaction$ = new Subject<ITransaction>();
   constructor(
@@ -34,11 +34,25 @@ export class TransactionService {
     return this.http.get<ITransaction>(`${this.baseUrl}/${accountId}/${id}`);
   }
 
-  createTransaction(transaction: Omit<ITransaction, '_id'>) {
-    return this.http.post<Omit<ITransaction, '_id'>>(
-      `${this.baseUrl}/${transaction.accountId}`,
+  createTransaction(transaction: Partial<ITransaction>, accountId: string) {
+    return this.http.post<ITransaction>(
+      `${this.baseUrl}/${accountId}`,
       transaction
     );
+  }
+
+  deleteTransaction(transactionId: string) {
+    const accountId = this.accountService.activeAccount._id;
+    this.transactions = this.transactions.filter(
+      (c) => c._id !== transactionId
+    );
+    this.transactions$.next(this.transactions.slice());
+    return this.http.delete(`${this.baseUrl}/${accountId}/${transactionId}`);
+  }
+
+  updateTransaction(transaction: Partial<ITransaction>) {
+    const accountId = this.accountService.activeAccount._id;
+    return this.http.put(`${this.baseUrl}/${accountId}`, transaction);
   }
 
   getAccounts() {

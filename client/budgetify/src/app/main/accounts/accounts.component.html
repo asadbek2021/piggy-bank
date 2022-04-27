@@ -6,10 +6,9 @@
     <mat-card-content>
       <mat-card-title class="account__title"> {{account.title}}</mat-card-title>
       <p class="account__balance">{{account.balance | currency:'symbol':''}}</p>
-      <button>See details</button>
     </mat-card-content>
     <div class="account__label">
-      <span>$</span>
+      <span>{{account.sign}}</span>
     </div>
   </mat-card>
 </div>

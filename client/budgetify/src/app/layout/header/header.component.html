@@ -5,10 +5,18 @@
     </div>
     <app-menu></app-menu>
     <div class="header__account">
-      <span class="account-icon">
-        <mat-icon class="acc-icon">person</mat-icon>
-      </span>
-      <a href="#" class="header__account-name" >Account Name</a>
+
+      <button mat-button [matMenuTriggerFor]="menu">
+        <span class="account-icon">
+          <mat-icon class="acc-icon">person</mat-icon>
+        </span>
+        <a class="header__account-name" >Account Name</a>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onLogout()">Logout</button>
+      </mat-menu>
+
+
     </div>
   </header>
 </div>

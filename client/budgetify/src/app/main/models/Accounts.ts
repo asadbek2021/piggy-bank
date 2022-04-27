@@ -1,4 +1,4 @@
-export  interface IAccounts {
+export interface IAccounts {
   _id: string;
   user_id: string;
   title: string;
@@ -7,4 +7,5 @@ export  interface IAccounts {
   balance: string;
   createdAt?: string;
   updatedAt?: string;
+  sign: string;
 }

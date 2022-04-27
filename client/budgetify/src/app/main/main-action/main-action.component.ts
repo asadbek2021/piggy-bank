@@ -26,4 +26,9 @@ export class MainActionComponent {
     this.sidenavService.sidenavContent$.next('category');
     this.sidenavService.openSideNav();
   }
+
+  onAddAccount() {
+    this.sidenavService.sidenavContent$.next('account-create');
+    this.sidenavService.openSideNav();
+  }
 }
