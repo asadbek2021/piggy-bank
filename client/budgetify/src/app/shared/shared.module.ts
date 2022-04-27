@@ -24,6 +24,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogExampleComponent } from './components/dialog-example/dialog-example.component';
+import { AccountPopupComponent } from './components/account-popup/account-popup.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DialogExampleComponent } from './components/dialog-example/dialog-examp
     AccountCreateComponent,
     CategoryCreateComponent,
     DialogExampleComponent,
+    AccountPopupComponent,
   ],
   imports: [
     CommonModule,

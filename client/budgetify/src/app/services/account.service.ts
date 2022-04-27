@@ -39,4 +39,8 @@ export class AccountService {
   addAccount(account: Partial<IAccounts>) {
     return this.http.post<IAccounts>(`${this.baseUrl}/account/`, account);
   }
+
+  deteleAccount(accountId: string) {
+    return this.http.delete(`${this.baseUrl}/account/${accountId}`);
+  }
 }

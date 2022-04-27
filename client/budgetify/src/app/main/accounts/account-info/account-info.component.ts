@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
+import { AccountPopupComponent } from 'src/app/shared/components/account-popup/account-popup.component';
 import { SidenavService } from 'src/app/shared/services/sidenav.service';
 import { IAccounts } from '../../models/Accounts';
 
@@ -14,7 +17,9 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   accountSubs!: Subscription;
   constructor(
     private accountService: AccountService,
-    private sidenavService: SidenavService
+    private sidenavService: SidenavService,
+    private matDialog: MatDialog,
+    private snackBar: MatSnackBar,
     ) {}
 
   ngOnInit(): void {
@@ -28,6 +33,15 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.accountSubs.unsubscribe();
   }
+
+  onEdit() {
+    this.sidenavService.sidenavContent$.next('account-create');
+  }
+
+  onDelete() {
+    this.matDialog.open(AccountPopupComponent);
+  }
+
   onClose() {
     this.sidenavService.closeSideNav();
   }

@@ -37,7 +37,7 @@ export class DialogExampleComponent implements OnInit {
       .deleteTransaction(this.selectedT._id)
       .subscribe(() => {
         this.snackBar.open(
-          `Transaction :${this.selectedT.title} was deleted!`,
+          `Transaction: ${this.selectedT.title} was deleted!`,
           'Close',
           { duration: 1000, verticalPosition: 'top' }
         );
@@ -45,7 +45,5 @@ export class DialogExampleComponent implements OnInit {
       });
   }
 
-  onClose() {
-
-  }
+  
 }
