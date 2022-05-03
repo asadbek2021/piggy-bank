@@ -12,19 +12,19 @@
       <div class="account__content-info">
         <div class="info-row">
           <p class="info-header">Title:</p>
-          <p class="info-text">Debit Card</p>
+          <p class="info-text">{{account.title}}</p>
         </div>
         <div class="info-row">
           <p class="info-header">Balance:</p>
-          <p class="info-text">5,356.18$</p>
+          <p class="info-text">{{account.balance}}</p>
         </div>
         <div class="info-row">
           <p class="info-header">Currency:</p>
-          <p class="info-text">USD ($)</p>
+          <p class="info-text">{{account.currency}} ({{account.sign}})</p>
         </div>
         <div class="info-row">
           <p class="info-header">Description:</p>
-          <p class="info-text">This account is related to card Bank of America</p>
+          <p class="info-text">{{account.description}}</p>
         </div>
       </div>
     </div>

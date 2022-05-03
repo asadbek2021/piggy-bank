@@ -26,6 +26,8 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./transaction-create.component.scss'],
 })
 export class TransactionCreateComponent implements OnInit, OnDestroy {
+  editMode = false;
+  editModeSubs!: Subscription;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   categoryCtrl = new FormControl();
   filteredCategories: Observable<string[]>;
@@ -44,7 +46,7 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
     categories: new FormControl([]),
     amount: new FormControl(0),
     date_of_payment: new FormControl(''),
-    payee: new FormControl(''),
+    payee: new FormControl('No payee'),
     description: new FormControl(''),
     accountId: new FormControl(''),
   });
@@ -64,11 +66,8 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.accountService.getAccounts().subscribe((data) => {
-    this.account = data[0];
-  });
+    this.account = this.accountService.activeAccount;
     this.accountService.activeAccount$.subscribe((account) => {
-      console.log( this.account);
       this.account = account;
       if (!account) {
         return;
@@ -80,10 +79,40 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
       .subscribe((categories) => {
         this.allCategories = categories;
       });
+    this.editMode = this.transactionService.editMode;
+    this.editModeSubs = this.transactionService.editMode$.subscribe((data) => {
+      console.log(this.editMode);
+      this.editMode = data;
+    });
+    if (this.editMode) {
+      this.categories = this.transactionService.selectedTransaction.categories;
+      this.onSetValue(this.transactionService.selectedTransaction.type);
+      this.transactionForm
+        .get('payee')
+        ?.setValue(this.transactionService.selectedTransaction.payee);
+      this.transactionForm
+        .get('title')
+        ?.setValue(this.transactionService.selectedTransaction.title);
+      this.transactionForm
+        .get('amount')
+        ?.setValue(this.transactionService.selectedTransaction.amount);
+      this.transactionForm
+        .get('date_of_payment')
+        ?.setValue(
+          this.transactionService.selectedTransaction.date_of_operation
+        );
+      this.transactionForm
+        .get('description')
+        ?.setValue(this.transactionService.selectedTransaction.description);
+      this.transactionForm
+        .get('accountId')
+        ?.setValue(this.transactionService.selectedTransaction.accountId);
+    }
   }
 
   ngOnDestroy(): void {
     this.categoriesSubs.unsubscribe();
+    this.editModeSubs.unsubscribe();
   }
 
   onSubmit() {
@@ -100,19 +129,20 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
       categories: this.categories,
       ...this.transactionForm.value,
     });
+    console.log(this.transactionForm.value);
     this.transactionService
-      .createTransaction(
-        this.transactionForm.value,
-        this.accountService.activeAccount._id
-      )
+      .createTransaction(this.transactionForm.value, this.account._id)
       .subscribe((data: ITransaction) => {
         const transactions = this.transactionService.transactions;
         transactions.push(data);
         this.transactionService.transactions$.next(transactions);
         this.onCloseSidenav();
-        this.snackBar.open('Transaction was successfully created!', 'Close', { duration: 1000 });
+        this.snackBar.open('Transaction was successfully created!', 'Close', {
+          duration: 1000,
+        });
       });
   }
+
   onSetValue(type: string) {
     this.currentType = type;
     this.transactionForm.get('type')?.setValue(type);

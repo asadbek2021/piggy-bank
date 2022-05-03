@@ -1,7 +1,7 @@
 <div class="transaction">
   <form class="form" (ngSubmit)="onSubmit()" [formGroup]="transactionForm">
     <div class="transaction__top">
-      <h1 class="transaction__title">Create Transaction</h1>
+      <h1 class="transaction__title">{{editMode ?  'Edit Transaction': 'Create Transaction'}}</h1>
       <button type="button" class=" btn close-btn" (click)="onCloseSidenav()"><mat-icon>close</mat-icon></button>
       <div class="transaction__top-type">
         <input type="text" class="hidden-type" name="type" formControlName="type" #type>

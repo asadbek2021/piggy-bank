@@ -12,6 +12,8 @@ export class TransactionService {
   private baseUrl = 'http://localhost:3000/transaction';
   selectedTransaction!: ITransaction;
   selectedType$ = new Subject<string>();
+  editMode$ = new Subject<boolean>();
+  editMode = false;
   selectedTransaction$ = new Subject<ITransaction>();
   constructor(
     private http: HttpClient,
@@ -53,9 +55,5 @@ export class TransactionService {
   updateTransaction(transaction: Partial<ITransaction>) {
     const accountId = this.accountService.activeAccount._id;
     return this.http.put(`${this.baseUrl}/${accountId}`, transaction);
-  }
-
-  getAccounts() {
-    return this.accountService.getAccounts();
   }
 }

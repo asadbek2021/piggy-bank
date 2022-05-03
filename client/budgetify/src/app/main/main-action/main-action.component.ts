@@ -8,16 +8,24 @@ import { TransactionService } from '../services/transaction.service';
   styleUrls: ['./main-action.component.scss'],
 })
 export class MainActionComponent {
+  transactionSort!: string;
   constructor(
     private transactionService: TransactionService,
     private sidenavService: SidenavService
   ) {}
 
   onSelect(type: string) {
+    if (type == this.transactionSort) {
+      this.transactionService.selectedType$.next('');
+      return;
+    }
+    this.transactionSort = type;
     this.transactionService.selectedType$.next(type);
   }
 
   onAddTransaction() {
+    this.transactionService.editMode = false;
+    this.transactionService.editMode$.next(false);
     this.sidenavService.sidenavContent$.next('main');
     this.sidenavService.openSideNav();
   }

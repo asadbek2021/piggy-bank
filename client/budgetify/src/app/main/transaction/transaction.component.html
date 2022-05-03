@@ -30,7 +30,7 @@
 
     <div  class="transaction__price" >
      <p [ngClass]="transaction.type === 'expense' ? 'expense': 'income' ">
-       {{transaction.amount | currency:currency}}
+       {{transaction.amount | currency:'symbol': account.sign}}
       </p>
     </div>
   </mat-card>

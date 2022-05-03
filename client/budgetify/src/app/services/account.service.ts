@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { IAccounts } from '../main/models/Accounts';
 
@@ -9,19 +9,18 @@ import { IAccounts } from '../main/models/Accounts';
 })
 export class AccountService {
   private baseUrl = 'http://localhost:3000';
-  private accounts: Array<IAccounts> = [];
   activeAccount!: IAccounts;
+  editMode = false;
+  editMode$ = new Subject<boolean>();
   activeAccount$ = new Subject<IAccounts>();
-  accounts$ = new BehaviorSubject<IAccounts[]>([...this.accounts]);
+  accounts$ = new Subject<IAccounts[]>();
   constructor(private http: HttpClient) {}
 
   getAccounts() {
     return this.http.get<IAccounts[]>(`${this.baseUrl}/account`).pipe(
       tap((accounts) => {
-        this.accounts = accounts;
         this.activeAccount = accounts[0];
         this.activeAccount$.next(this.activeAccount);
-        this.accounts$.next([...this.accounts]);
       })
     );
   }
@@ -37,10 +36,26 @@ export class AccountService {
   }
 
   addAccount(account: Partial<IAccounts>) {
-    return this.http.post<IAccounts>(`${this.baseUrl}/account/`, account);
+    return this.http.post<IAccounts>(`${this.baseUrl}/account/`, account).pipe(
+      tap((account) => {
+        this.getAccounts().subscribe((accs) => {
+          this.accounts$.next(accs);
+        });
+      })
+    );
   }
 
   deteleAccount(accountId: string) {
     return this.http.delete(`${this.baseUrl}/account/${accountId}`);
+  }
+
+  updateAccount(id: string, body: Partial<IAccounts>) {
+    return this.http.put<IAccounts>(`${this.baseUrl}/account/${id}`, body).pipe(
+      tap((account) => {
+        this.getAccounts().subscribe((accs) => {
+          this.accounts$.next(accs);
+        });
+      })
+    );
   }
 }

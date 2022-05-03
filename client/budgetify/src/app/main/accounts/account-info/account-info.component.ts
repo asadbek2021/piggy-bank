@@ -18,11 +18,11 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   constructor(
     private accountService: AccountService,
     private sidenavService: SidenavService,
-    private matDialog: MatDialog,
-    private snackBar: MatSnackBar,
-    ) {}
+    private matDialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
+    this.account = this.accountService.activeAccount;
     this.accountSubs = this.accountService.activeAccount$.subscribe(
       (account) => {
         this.account = account;
@@ -35,6 +35,8 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   }
 
   onEdit() {
+    this.accountService.editMode = true;
+    this.accountService.editMode$.next(true);
     this.sidenavService.sidenavContent$.next('account-create');
   }
 

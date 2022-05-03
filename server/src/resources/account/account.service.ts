@@ -4,32 +4,33 @@ import Account from './account.model';
 import Currency from 'currency-formatter';
 
 export async function createAccount(req:Request, res: Response,next:NextFunction) {
+ try{
   const {id}:{id:string} |any = req.user;
   const account = { ...req.body, user_id: id};
   account.sign = Currency.findCurrency(account.currency)?.symbol;
   const newAccount = await Account.create(account);
   res.status(201).json(newAccount);
+ }
+ catch(err){
+   next(err);
+ }
 }
 
 export async function updateAccount(req:Request, res:Response,next:NextFunction) {
-  const {
-    user_id,
-    title,
-    description,
-    category,
-    currency,
-    availableAmount,
-  } = req.body;
-  const newAccount = {
-    user_id,
-    title,
-    description,
-    category,
-    currency,
-    availableAmount,
-  };
-  const account = await Account.findByIdAndUpdate(req.params.id, newAccount, { new: true });
-  res.status(201).json(account);
+  try{
+    const acc = await Account.findById(req.params.id)
+    if(req.body?.currency && req.body.currency == acc?.currency){
+      const account = await Account.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      res.status(201).json(account);
+      return;
+    }
+    let sign = Currency.findCurrency(req.body.currency)?.symbol;
+    const account = await Account.findByIdAndUpdate(req.params.id, {...req.body, sign}, { new: true });
+    res.status(201).json(account);
+  }
+  catch(err){
+    next(err)
+  }
 }
 
 export async function deleteAccount(req:Request, res:Response, next:NextFunction) {

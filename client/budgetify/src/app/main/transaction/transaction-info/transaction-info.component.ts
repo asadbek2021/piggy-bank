@@ -18,13 +18,11 @@ export class TransactionInfoComponent implements OnInit, OnDestroy {
   constructor(
     private transactionService: TransactionService,
     private sidenavService: SidenavService,
-    private snackBar: MatSnackBar,
     private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.transaction = this.transactionService.selectedTransaction;
-
     this.transactionSubs =
       this.transactionService.selectedTransaction$.subscribe((transaction) => {
         this.transaction = transaction;
@@ -36,6 +34,8 @@ export class TransactionInfoComponent implements OnInit, OnDestroy {
   }
 
   onEdit() {
+    this.transactionService.editMode$.next(true);
+    this.transactionService.editMode = true;
     this.sidenavService.sidenavContent$.next('main');
   }
 

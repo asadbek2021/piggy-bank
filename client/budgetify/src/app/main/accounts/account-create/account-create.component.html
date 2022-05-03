@@ -5,7 +5,7 @@
 
       <div class="form-content">
         <div class="account__content-top">
-          <h4 class="account-title">Add Account</h4>
+          <h4 class="account-title">{{editMode ?  'Edit Account': 'Add Account'}}</h4>
           <button type="button" class="account-close" (click)="onClose()"><mat-icon>close</mat-icon></button>
         </div>
         <mat-form-field appearance="outline">

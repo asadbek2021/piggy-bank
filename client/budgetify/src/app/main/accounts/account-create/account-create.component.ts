@@ -11,6 +11,7 @@ import { IAccounts } from '../../models/Accounts';
   styleUrls: ['./account-create.component.scss'],
 })
 export class AccountCreateComponent implements OnInit {
+  editMode = false;
   addAccountForm!: FormGroup;
   currencies!: { code: string; sign: string }[];
   constructor(
@@ -29,6 +30,22 @@ export class AccountCreateComponent implements OnInit {
       description: new FormControl(''),
       balance: new FormControl(0, Validators.required),
     });
+    this.editMode = this.accountService.editMode;
+
+    if (this.editMode) {
+      this.addAccountForm
+        .get('title')
+        ?.setValue(this.accountService.activeAccount.title);
+      this.addAccountForm
+        .get('currency')
+        ?.setValue(this.accountService.activeAccount.currency);
+      this.addAccountForm
+        .get('description')
+        ?.setValue(this.accountService.activeAccount.description);
+      this.addAccountForm
+        .get('balance')
+        ?.setValue(this.accountService.activeAccount.balance);
+    }
   }
 
   onClose() {
@@ -41,19 +58,32 @@ export class AccountCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.accountService
-      .addAccount(this.addAccountForm.value)
-      .subscribe((account: IAccounts) => {
-         this.accountService.getAccounts().subscribe(accounts=>{
-          this.accountService.accounts$.next(accounts);
+    if (!this.editMode) {
+      this.accountService
+        .addAccount(this.addAccountForm.value)
+        .subscribe((account: IAccounts) => {
+          this.snackBar.open(
+            `The account ${account.title} was successfully created`,
+            'Close',
+            { verticalPosition: 'top', politeness: 'polite', duration: 1000 }
+          );
+          this.onClose();
         });
-       
+      return;
+    }
+
+    this.accountService
+      .updateAccount(
+        this.accountService.activeAccount._id,
+        this.addAccountForm.value
+      )
+      .subscribe((account) => {
         this.snackBar.open(
-          `The account ${account.title} was successfully created`,
+          `The account ${account.title} was successfully updated`,
           'Close',
-          { verticalPosition: 'top', politeness: 'polite' }
+          { verticalPosition: 'top', politeness: 'polite', duration: 1000 }
         );
+        this.onClose();
       });
-     
   }
 }

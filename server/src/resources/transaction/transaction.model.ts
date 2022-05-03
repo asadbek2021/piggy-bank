@@ -7,6 +7,7 @@ interface ITransaction {
   description?: string;
   date_of_operation: Date;
   title:string;
+  payee?: string;
   categories:string[];
 }
 interface TransactionModel extends Model<ITransaction>{
@@ -37,6 +38,11 @@ const transactionSchema = new Schema<ITransaction,TransactionModel>({
     type: Date,
     required: true,
     default: Date.now,
+  },
+  payee:{
+    type: String,
+    required:false,
+    default: 'No payee'
   },
   categories: [{
     type: String,
