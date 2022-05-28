@@ -1,6 +1,4 @@
 import express from 'express';
-
-const app = express();
 import cors from 'cors';
 import passport from 'passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
@@ -22,6 +20,7 @@ import {connect} from './loader/dbconnect';
 import auth from './middlewares/authMiddleware';
 import currencyRouter from './resources/currency/currency.router'
 
+const app = express();
 connect();
 
 app.use(express.json());
