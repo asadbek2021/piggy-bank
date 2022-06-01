@@ -129,18 +129,33 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
       categories: this.categories,
       ...this.transactionForm.value,
     });
-    console.log(this.transactionForm.value);
-    this.transactionService
-      .createTransaction(this.transactionForm.value, this.account._id)
-      .subscribe((data: ITransaction) => {
-        const transactions = this.transactionService.transactions;
-        transactions.push(data);
-        this.transactionService.transactions$.next(transactions);
-        this.onCloseSidenav();
-        this.snackBar.open('Transaction was successfully created!', 'Close', {
-          duration: 1000,
+    if (this.editMode) {
+      this.transactionService
+        .updateTransaction(this.transactionForm.value)
+        .subscribe(() => {
+          this.transactionService
+            .getTransactions(this.account._id)
+            .subscribe((transactions) => {
+              this.transactionService.transactions$.next(transactions);
+            });
+          this.onCloseSidenav();
+          this.snackBar.open('Transaction was successfully created!', 'Close', {
+            duration: 1000,
+          });
         });
-      });
+    } else {
+      this.transactionService
+        .createTransaction(this.transactionForm.value, this.account._id)
+        .subscribe((data: ITransaction) => {
+          const transactions = this.transactionService.transactions;
+          transactions.push(data);
+          this.transactionService.transactions$.next(transactions);
+          this.onCloseSidenav();
+          this.snackBar.open('Transaction was successfully created!', 'Close', {
+            duration: 1000,
+          });
+        });
+    }
   }
 
   onSetValue(type: string) {

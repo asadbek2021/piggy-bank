@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { AccountService } from 'src/app/services/account.service';
 import { DialogExampleComponent } from 'src/app/shared/components/dialog-example/dialog-example.component';
 import { SidenavService } from 'src/app/shared/services/sidenav.service';
+import { IAccounts } from '../../models/Accounts';
 import { ITransaction } from '../../models/Transactions.model';
 import { TransactionService } from '../../services/transaction.service';
 
@@ -15,10 +16,13 @@ import { TransactionService } from '../../services/transaction.service';
 export class TransactionInfoComponent implements OnInit, OnDestroy {
   transaction!: ITransaction;
   transactionSubs!: Subscription;
+  currentAccount!: IAccounts;
+  currentAccountSubs!: Subscription;
   constructor(
     private transactionService: TransactionService,
     private sidenavService: SidenavService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -27,10 +31,17 @@ export class TransactionInfoComponent implements OnInit, OnDestroy {
       this.transactionService.selectedTransaction$.subscribe((transaction) => {
         this.transaction = transaction;
       });
+    this.currentAccount = this.accountService.activeAccount;
+    this.currentAccountSubs = this.accountService.activeAccount$.subscribe(
+      (account) => {
+        this.currentAccount = account;
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.transactionSubs.unsubscribe();
+    this.currentAccountSubs.unsubscribe();
   }
 
   onEdit() {

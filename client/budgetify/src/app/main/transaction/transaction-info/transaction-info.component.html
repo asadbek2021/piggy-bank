@@ -17,7 +17,7 @@
     </span>
     <span class="amount"
     ngClass="{{transaction.type === 'expense' ? 'expense' : 'income' }}">
-    {{transaction.amount | currency}}
+    {{transaction.amount | currency: 'symbol': currentAccount.sign}}
   </span>
   </div>
   <div class="transaction__content">

@@ -54,6 +54,9 @@ export class TransactionService {
 
   updateTransaction(transaction: Partial<ITransaction>) {
     const accountId = this.accountService.activeAccount._id;
-    return this.http.put(`${this.baseUrl}/${accountId}`, transaction);
+    return this.http.put(
+      `${this.baseUrl}/${accountId}/${this.selectedTransaction._id}`,
+      transaction
+    );
   }
 }
