@@ -1,15 +1,5 @@
 import { Schema, model, Model,Document,Query } from 'mongoose';
-
-interface IUser {
-  email: Schema.Types.ObjectId;
-  password: string;
-  role: string;
-  firstname: string;
-  lastname: string;
-  gender: string;
-  birthday: string;
-  residence: string;
-}
+import { type IUser } from './interfaces';
 
 interface UserModel extends Model<IUser> {
 }

@@ -14,6 +14,18 @@ export async function updateUser(req:Request, res:Response, next:NextFunction) {
   }
 }
 
+export async function createUser(req:Request, res:Response, next:NextFunction) {
+  try {
+    const user = await UserRepository.createUser(req.body);
+    if (!user) {
+      throw new HttpError(`There is no user with the id ${req.params.id} `, 404);
+    }
+    res.status(201).json(user);
+  } catch (err) {
+    next(err);
+  }
+}
+
 export async function deleteUser(req:Request, res:Response, next:NextFunction) {
   try {
     await UserRepository.removeUser(req.params.id);

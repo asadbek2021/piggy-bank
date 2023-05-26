@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { createAccount, deleteAccount, getAccountByUserId, updateAccount, getAccountById } from './account.service';
+import { createAccount, deleteAccount, getAccountsByUserId, updateAccount, getAccountById } from './account.service';
 
 const router = Router();
 
-router.get('/', getAccountByUserId);
+router.get('/', getAccountsByUserId);
 router.get('/:id', getAccountById);
 router.post('/', createAccount);
 router.put('/:id', updateAccount);

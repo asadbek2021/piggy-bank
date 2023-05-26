@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon src/server.ts",
+    "debug": "nodemon src/server.ts --inspect",
     "lint": "eslint --ext .ts src",
     "test": "jest --coverage"
   },
@@ -38,6 +39,7 @@
     "mongoose": "^6.2.6",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
+    "redis": "^4.6.6",
     "ts-node": "^10.7.0",
     "uuid": "^8.3.2",
     "winston": "^3.6.0"

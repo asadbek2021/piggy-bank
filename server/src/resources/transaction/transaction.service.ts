@@ -1,12 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 
-import Transaction from './transaction.model';
+import Transaction, { ITransaction } from './transaction.model';
+import { caching } from "../../tools";
+const client = caching.getClient();
 
 export async function getAllTransAccount(req:Request, res:Response, next:NextFunction) {
   try {
     const { accoundId } = req.params;
     const transactions = await Transaction.findByAccountId(accoundId);
-    res.json(transactions);
+    res.send(transactions);
   } catch (err) {
     next(err);
   }
@@ -25,6 +27,14 @@ export async function getTransById(req:Request, res:Response, next:NextFunction)
 export async function createTrans(req:Request, res:Response, next:NextFunction) {
   try {
     const transaction = await Transaction.create({ ...req.body, accountId: req.params.accountId });
+    const cachedTrans = await client.get(`transactions_${req.params.accountId}`);
+    if(cachedTrans){
+      const parsedTrans: ITransaction[] = JSON.parse(cachedTrans);
+      parsedTrans.push(transaction);
+      await client.set(`transactions_${req.params.accountId}`, JSON.stringify(parsedTrans));
+    } else {
+      await client.set(`transactions_${req.params.accountId}`, JSON.stringify([transaction]));
+    }
     res.json(transaction);
   } catch (err) {
     next(err);

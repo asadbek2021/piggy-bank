@@ -1,11 +1,15 @@
+import mongoose from 'mongoose';
+
+import { caching } from '../tools';
 import config from '../config/config';
 import { logger } from '../tools/Logger';
-import mongoose from 'mongoose';
 
 export async function connect() {
   try {
-    await mongoose.connect(`${config.MONGO_URI}${config.DB_NAME}`);
+    await mongoose.connect(`${config.MONGO_URI}/${config.DB_NAME}`);
+    await caching.connectRedis();
     logger.info('Connected to database');
+    await import('../services/cacheService');
   } catch (err) {
     logger.error(err);
   }

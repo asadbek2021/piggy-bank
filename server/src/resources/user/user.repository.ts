@@ -1,4 +1,5 @@
 import User from './user.model';
+import { type IUser } from './interfaces';
 
 interface IUserBody{
   email: string;
@@ -28,6 +29,12 @@ class UserRepository {
 
   async removeUser(id:string) {
     await User.findByIdAndDelete(id);
+  }
+
+  async createUser(body: IUser){
+    const user  = new User({...body});
+    await user.save();
+    return user;
   }
 }
 

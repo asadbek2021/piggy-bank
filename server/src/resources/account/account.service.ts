@@ -44,7 +44,7 @@ export async function deleteAccount(req:Request, res:Response, next:NextFunction
   }
 }
 
-export async function getAccountByUserId(req:Request, res:Response, next:NextFunction) {
+export async function getAccountsByUserId(req:Request, res:Response, next:NextFunction) {
   try {
     const {id}:{id:string} | any = req.user;
       const accounts = await Account.getByUserId(id);

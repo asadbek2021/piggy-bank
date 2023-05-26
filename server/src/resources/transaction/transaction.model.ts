@@ -1,6 +1,6 @@
 import { Model,Schema, model } from 'mongoose';
 
-interface ITransaction {
+export interface ITransaction {
   type: string;
   accountId: Schema.Types.ObjectId;
   amount: number;
