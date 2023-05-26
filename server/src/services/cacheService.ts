@@ -5,7 +5,18 @@ import {caching} from '../tools';
 const originalExec = mongoose.Query.prototype.exec;
 const client = caching.getClient();
 
+// @ts-ignore
+mongoose.Query.prototype.cache = function() {
+    // @ts-ignore
+    this.useCache = true;
+    return this;
+}
+
 mongoose.Query.prototype.exec = async function() {
+    // @ts-ignore
+    if(!this.useCache){
+        return originalExec.apply(this, arguments as any);
+    }
     const key = JSON.stringify({...this.getQuery(), collection: this.model.collection.name});
     const cached = await client.get(key);
     if(cached){

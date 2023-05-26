@@ -44,7 +44,8 @@ const accountSchema = new Schema<IAccount,AccountModel>({
 }, { timestamps: true });
 
 accountSchema.statics.getByUserId = function getById(user_id) {
-  return this.where({ user_id }).exec();
+  // @ts-ignore
+  return this.where({ user_id }).cache().exec();
 };
 
 export default model<IAccount, AccountModel>('Account', accountSchema);

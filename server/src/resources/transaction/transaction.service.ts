@@ -7,6 +7,7 @@ const client = caching.getClient();
 export async function getAllTransAccount(req:Request, res:Response, next:NextFunction) {
   try {
     const { accoundId } = req.params;
+    // @ts-ignore
     const transactions = await Transaction.findByAccountId(accoundId);
     res.send(transactions);
   } catch (err) {

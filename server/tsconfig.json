@@ -102,5 +102,5 @@
     "src/**/*.ts"
   ],
   "exclude": ["./node_modules",".eslintrc.json","./test","dist","coverage"],
-  "files": ["./custom.d.ts"]
+  "files": ["./src/types/index.d.ts"]
 }
