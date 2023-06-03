@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
-import HttpError from '../../tools/httpError';
+import { HttpError } from '../../tools/httpError';
 import { register, login } from './auth.repository';
 import config from '../../config/config';
 import { NextFunction, Request, Response } from 'express';

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import HttpError from '../../tools/httpError';
+import { HttpError } from '../../tools';
 import UserRepository from './user.repository';
 
 export async function updateUser(req:Request, res:Response, next:NextFunction) {

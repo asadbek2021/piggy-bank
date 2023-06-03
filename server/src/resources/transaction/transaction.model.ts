@@ -11,7 +11,7 @@ export interface ITransaction {
   categories:string[];
 }
 interface TransactionModel extends Model<ITransaction>{
-  findByAccountId(id:string):Promise<ITransaction[]>
+  findByAccountId(id:string, userId?: string):Promise<ITransaction[]>
 }
 const transactionSchema = new Schema<ITransaction,TransactionModel>({
   type: {
@@ -57,9 +57,9 @@ const transactionSchema = new Schema<ITransaction,TransactionModel>({
 }, { timestamps: true });
 
 
-transactionSchema.statics.findByAccountId = function findByAccountId(accountId:string) {
+transactionSchema.statics.findByAccountId = function findByAccountId(accountId:string, userId?: string) {
   //@ts-ignore
-  return this.where({ accountId }).cache().exec();
+  return this.where({ accountId }).cache({key: userId}).exec();
 };
 
 export default model<ITransaction, TransactionModel>('Transaction', transactionSchema);

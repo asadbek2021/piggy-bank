@@ -8,7 +8,7 @@ export async function getAllTransAccount(req:Request, res:Response, next:NextFun
   try {
     const { accoundId } = req.params;
     // @ts-ignore
-    const transactions = await Transaction.findByAccountId(accoundId);
+    const transactions = await Transaction.findByAccountId(accoundId, req.user?.id);
     res.send(transactions);
   } catch (err) {
     next(err);
@@ -18,7 +18,8 @@ export async function getAllTransAccount(req:Request, res:Response, next:NextFun
 export async function getTransById(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
-    const transaction = await Transaction.findById(id);
+    // @ts-ignore
+    const transaction = await Transaction.findById(id).cache({key: req.user?.id});
     res.json(transaction);
   } catch (err) {
     next(err);
@@ -28,14 +29,6 @@ export async function getTransById(req:Request, res:Response, next:NextFunction)
 export async function createTrans(req:Request, res:Response, next:NextFunction) {
   try {
     const transaction = await Transaction.create({ ...req.body, accountId: req.params.accountId });
-    const cachedTrans = await client.get(`transactions_${req.params.accountId}`);
-    if(cachedTrans){
-      const parsedTrans: ITransaction[] = JSON.parse(cachedTrans);
-      parsedTrans.push(transaction);
-      await client.set(`transactions_${req.params.accountId}`, JSON.stringify(parsedTrans));
-    } else {
-      await client.set(`transactions_${req.params.accountId}`, JSON.stringify([transaction]));
-    }
     res.json(transaction);
   } catch (err) {
     next(err);

@@ -5,7 +5,7 @@ import Category from './category.model';
 export async function getAllCategories(req:Request, res:Response, next:NextFunction) {
   try {
     // @ts-ignore
-    const categories = await Category.find({}).cache();
+    const categories = await Category.find({}).cache({key: req.user?.id});
     res.json(categories);
   } catch (err) {
     next(err);
@@ -16,7 +16,7 @@ export async function getCategoryById(req:Request, res:Response, next:NextFuncti
   try {
     const { id } = req.params;
     // @ts-ignore
-    const category = await Category.findById(id).cache();
+    const category = await Category.findById(id).cache({key: req.user?.id});
     res.json(category);
   } catch (err) {
     next(err);

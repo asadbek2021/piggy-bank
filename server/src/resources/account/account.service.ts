@@ -27,6 +27,8 @@ export async function updateAccount(req:Request, res:Response,next:NextFunction)
     let sign = Currency.findCurrency(req.body.currency)?.symbol;
     const account = await Account.findByIdAndUpdate(req.params.id, {...req.body, sign}, { new: true });
     res.status(201).json(account);
+    // @ts-ignore
+    await clearHash(req.user?.id);
   }
   catch(err){
     next(err)
@@ -39,6 +41,8 @@ export async function deleteAccount(req:Request, res:Response, next:NextFunction
     await Account.findByIdAndDelete(id);
     await Transaction.findOneAndDelete({ account_id: id });
     res.status(204).json();
+    // @ts-ignore
+    await clearHash(req.user?.id);
   } catch (err) {
     next(err);
   }
@@ -47,7 +51,7 @@ export async function deleteAccount(req:Request, res:Response, next:NextFunction
 export async function getAccountsByUserId(req:Request, res:Response, next:NextFunction) {
   try {
     const {id}:{id:string} | any = req.user;
-      const accounts = await Account.getByUserId(id);
+    const accounts = await Account.getByUserId(id);
     res.json(accounts);
     } catch (err) {
      next(err);
@@ -58,7 +62,7 @@ export async function getAccountById(req:Request, res:Response, next:NextFunctio
   try {
     const { id } = req.params;
     // @ts-ignore
-    const account = await Account.findById(id).cache();
+    const account = await Account.findById(id).cache({key: req.user?.id});
     res.json(account);
   } catch (err) {
     next(err);

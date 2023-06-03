@@ -1,4 +1,4 @@
-class httpError extends Error {
+export class HttpError extends Error {
   public statusCode:number;
   public body?: {[key:string]:any};
   constructor(message:string, statusCode:number, body?:{[key:string]:any}) {
@@ -11,5 +11,3 @@ class httpError extends Error {
     return this.message;
   }
 }
-
-export default httpError;

@@ -16,7 +16,7 @@ interface IUser {
 
 export async function getUserByEmail(email:string) {
   // @ts-ignore
-  const user = await User.find({ email }).cache();
+  const user = await User.find({ email });
   return user[0];
 }
 
