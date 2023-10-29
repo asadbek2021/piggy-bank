@@ -1,4 +1,4 @@
-import { Model,Schema, model } from 'mongoose';
+import { Model, Schema, model } from 'mongoose';
 
 export interface ITransaction {
   type: string;
@@ -6,58 +6,62 @@ export interface ITransaction {
   amount: number;
   description?: string;
   date_of_operation: Date;
-  title:string;
+  title: string;
   payee?: string;
-  categories:string[];
+  categories: string[];
 }
-interface TransactionModel extends Model<ITransaction>{
-  findByAccountId(id:string, userId?: string):Promise<ITransaction[]>
+interface TransactionModel extends Model<ITransaction> {
+  findByAccountId(id: string): Promise<ITransaction[]>;
 }
-const transactionSchema = new Schema<ITransaction,TransactionModel>({
-  type: {
-    type: String,
-    required: true,
-    validate: {
-      validator: (type:string) => ['income', 'expense'].includes(type),
+const transactionSchema = new Schema<ITransaction, TransactionModel>(
+  {
+    type: {
+      type: String,
+      required: true,
+      validate: {
+        validator: (type: string) => ['income', 'expense'].includes(type),
+      },
+    },
+    accountId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'Account',
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      default: '',
+    },
+    date_of_operation: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    payee: {
+      type: String,
+      required: false,
+      default: 'No payee',
+    },
+    categories: [
+      {
+        type: String,
+        ref: 'Category',
+        required: false,
+      },
+    ],
+    amount: {
+      type: Number,
+      required: true,
+      default: 0,
     },
   },
-  accountId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'Account',
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    default: '',
-  },
-  date_of_operation: {
-    type: Date,
-    required: true,
-    default: Date.now,
-  },
-  payee:{
-    type: String,
-    required:false,
-    default: 'No payee'
-  },
-  categories: [{
-    type: String,
-    ref: 'Category',
-    required: false,
-  }],
-  amount: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-}, { timestamps: true });
+  { timestamps: true }
+);
 
-
-transactionSchema.statics.findByAccountId = function findByAccountId(accountId:string, userId?: string) {
+transactionSchema.statics.findByAccountId = function findByAccountId(accountId: string) {
   // return this.where({ accountId }).cache({key: userId}).exec();
   return this.where({ accountId }).exec();
 };

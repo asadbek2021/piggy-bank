@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 
 import Category from './category.model';
 
-export async function getAllCategories(req:Request, res:Response, next:NextFunction) {
+export async function getAllCategories(req: Request, res: Response, next: NextFunction) {
   try {
     // const categories = await Category.find({}).cache({key: req.user?.id});
     const categories = await Category.find({});
@@ -12,7 +12,7 @@ export async function getAllCategories(req:Request, res:Response, next:NextFunct
   }
 }
 
-export async function getCategoryById(req:Request, res:Response, next:NextFunction) {
+export async function getCategoryById(req: Request, res: Response, next: NextFunction) {
   try {
     const { id } = req.params;
     // const category = await Category.findById(id).cache({key: req.user?.id});
@@ -23,7 +23,7 @@ export async function getCategoryById(req:Request, res:Response, next:NextFuncti
   }
 }
 
-export async function createCategory(req:Request, res:Response, next:NextFunction) {
+export async function createCategory(req: Request, res: Response, next: NextFunction) {
   try {
     const category = await Category.create(req.body);
     res.json(category);
@@ -32,7 +32,7 @@ export async function createCategory(req:Request, res:Response, next:NextFunctio
   }
 }
 
-export async function updateCategory(req:Request, res:Response, next:NextFunction) {
+export async function updateCategory(req: Request, res: Response, next: NextFunction) {
   try {
     const { id } = req.params;
     const category = await Category.findByIdAndUpdate(id, req.body, { new: true });
@@ -42,7 +42,7 @@ export async function updateCategory(req:Request, res:Response, next:NextFunctio
   }
 }
 
-export async function deleteCategory(req:Request, res:Response, next:NextFunction) {
+export async function deleteCategory(req: Request, res: Response, next: NextFunction) {
   try {
     const { id } = req.params;
     await Category.findByIdAndDelete(id);
@@ -51,5 +51,3 @@ export async function deleteCategory(req:Request, res:Response, next:NextFunctio
     next(err);
   }
 }
-
-

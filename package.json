@@ -10,6 +10,7 @@
     "mongo:indices": "echo 'Coming soon!'",
     "debug": "nodemon src/server.ts --inspect",
     "lint": "eslint --fix --ext .ts src",
+    "pretty": "prettier --write ./src",
     "test": "jest --coverage"
   },
   "repository": {

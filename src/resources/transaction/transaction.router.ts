@@ -1,12 +1,6 @@
 import { Router } from 'express';
 
-import { 
-    getAllTransAccount, 
-    getTransById, 
-    createTrans, 
-    updateTrans, 
-    deleteTrans 
-} from './transaction.service';
+import { getAllTransAccount, getTransById, createTrans, updateTrans, deleteTrans } from './transaction.service';
 // import { cleanCache } from '../../middlewares/cleanCacheMiddleware';
 
 const router = Router();

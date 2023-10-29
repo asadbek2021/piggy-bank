@@ -16,9 +16,9 @@ import obligatoryRouter from './resources/obligatory_payment/obligatory.router';
 import faqRouter from './resources/faq/faq.router';
 import piggyBankRouter from './resources/piggy_bank/piggy.router';
 import { jwtCallback } from './resources/auth/auth.repository';
-import {connect} from './loader/dbconnect';
+import { connect } from './loader/dbconnect';
 import auth from './middlewares/authMiddleware';
-import currencyRouter from './resources/currency/currency.router'
+import currencyRouter from './resources/currency/currency.router';
 
 const app = express();
 connect();
@@ -43,7 +43,7 @@ app.use('/category', auth, categoryRouter);
 app.use('/piggybank', auth, piggyBankRouter);
 app.use('/subscription', auth, subscriptionRouter);
 app.use('/obligatory', auth, obligatoryRouter);
-app.use('/currency', auth, currencyRouter)
+app.use('/currency', auth, currencyRouter);
 app.use('/auth', authRouter);
 app.use('/faq', faqRouter);
 app.use(errorHandler);

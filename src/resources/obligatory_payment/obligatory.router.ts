@@ -1,11 +1,5 @@
 import { Router } from 'express';
-import {
-  getAllObligatory,
-  getObligatoryById,
-  createObligatory,
-  updateObligatory,
-  deleteObligatory
-} from './obligatory.service';
+import { getAllObligatory, getObligatoryById, createObligatory, updateObligatory, deleteObligatory } from './obligatory.service';
 
 const router = Router();
 

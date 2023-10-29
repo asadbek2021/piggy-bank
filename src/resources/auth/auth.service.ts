@@ -1,26 +1,17 @@
 import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
+import { NextFunction, Request, Response } from 'express';
 import { HttpError } from '../../tools/httpError';
 import { register, login } from './auth.repository';
 import config from '../../config/config';
-import { NextFunction, Request, Response } from 'express';
 
-export async function registerUser(req:Request, res:Response, next:NextFunction) {
+export async function registerUser(req: Request, res: Response, next: NextFunction) {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       throw new HttpError('Validation error: ', 403, errors);
     }
-    const {
-      email,
-      password,
-      role,
-      firstname,
-      lastname,
-      gender,
-      birthday,
-      residence,
-    } = req.body;
+    const { email, password, role, firstname, lastname, gender, birthday, residence } = req.body;
     if (new Date().getFullYear() - new Date(birthday).getFullYear() >= 18) {
       const user = await register({
         email,
@@ -41,7 +32,7 @@ export async function registerUser(req:Request, res:Response, next:NextFunction)
   }
 }
 
-export async function loginUser(req:Request, res:Response, next:NextFunction) {
+export async function loginUser(req: Request, res: Response, next: NextFunction) {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -55,11 +46,7 @@ export async function loginUser(req:Request, res:Response, next:NextFunction) {
         email: user.email,
         role: user.role,
       };
-      const token = jwt.sign(
-        payload,
-        config.JWT_SECRET,
-        { expiresIn: config.JWT_EXPIRES_IN },
-      );
+      const token = jwt.sign(payload, config.JWT_SECRET, { expiresIn: config.JWT_EXPIRES_IN });
       res.status(200).json({
         token: `Bearer ${token}`,
         expiresIn: config.JWT_EXPIRES_IN,
@@ -71,5 +58,3 @@ export async function loginUser(req:Request, res:Response, next:NextFunction) {
     next(err);
   }
 }
-
-

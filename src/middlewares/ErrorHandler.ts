@@ -1,8 +1,8 @@
-import { NextFunction,Request,Response} from 'express';
+import { NextFunction, Request, Response } from 'express';
 import {} from '../tools/httpError';
 import { logger, HttpError } from '../tools';
 
-function errorHandler(err: HttpError | Error, req:Request, res:Response, next:NextFunction) {
+function errorHandler(err: HttpError | Error, req: Request, res: Response, next: NextFunction) {
   if (err instanceof HttpError) {
     if (err.body) {
       logger.error(`RESPONSE | Status: ${err.statusCode} message: ${err.message}`);

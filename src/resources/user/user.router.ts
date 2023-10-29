@@ -1,15 +1,9 @@
 import { Router } from 'express';
 import addGuard from '../../middlewares/guards';
 
-const router = Router();
+import { updateUser, deleteUser, getUserById, getUsers, createUser } from './user.service';
 
-import { 
-    updateUser, 
-    deleteUser, 
-    getUserById, 
-    getUsers, 
-    createUser
-} from './user.service';
+const router = Router();
 // import { cleanCache } from '../../middlewares/cleanCacheMiddleware';
 
 router.get('/', addGuard, getUsers);

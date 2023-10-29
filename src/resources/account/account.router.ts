@@ -1,12 +1,6 @@
 import { Router } from 'express';
 
-import { 
-    createAccount, 
-    deleteAccount, 
-    getAccountsByUserId, 
-    updateAccount, 
-    getAccountById 
-} from './account.service';
+import { createAccount, deleteAccount, getAccountsByUserId, updateAccount, getAccountById } from './account.service';
 // import { cleanCache } from '../../middlewares/cleanCacheMiddleware';
 
 const router = Router();

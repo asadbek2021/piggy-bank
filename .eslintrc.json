@@ -23,7 +23,7 @@
         "@typescript-eslint/no-unused-vars": "error",
         "semi": "error",
         "no-unused-expressions": "error",
-        "space-in-parens": ["error", "always"],
+        "space-in-parens": ["off", "always"],
         "import/extensions": "off"
     }
 }

@@ -1,6 +1,5 @@
-import mongoose from "mongoose";
-import {caching, HttpError } from '../tools';
-
+// import mongoose from 'mongoose';
+// import { caching, HttpError } from '../tools';
 
 // const originalExec = mongoose.Query.prototype.exec;
 // // const client = caching.getClient();
@@ -26,8 +25,8 @@ import {caching, HttpError } from '../tools';
 //     // if(cached){
 //     //     const doc = JSON.parse(cached);
 
-//     //     return Array.isArray(doc) 
-//     //         ? doc.map(d => new this.model(d)) 
+//     //     return Array.isArray(doc)
+//     //         ? doc.map(d => new this.model(d))
 //     //         : new this.model(doc);
 //     // }
 //     const result = await originalExec.apply(this, arguments as any);

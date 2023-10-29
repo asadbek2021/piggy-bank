@@ -10,7 +10,7 @@ const categorySchema = new Schema({
   type: {
     type: String,
     validate: {
-      validator: (type:string) => ['income', 'expense'].includes(type),
+      validator: (type: string) => ['income', 'expense'].includes(type),
       message: '{VALUE} is not a valid type, accept only income or expense',
     },
   },
