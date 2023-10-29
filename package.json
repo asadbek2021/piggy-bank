@@ -4,8 +4,10 @@
   "description": "Web application for Exadel Internship project. It is kinda online bank",
   "main": "server.js",
   "scripts": {
-    "build": "tsc",
-    "start": "nodemon src/server.ts",
+    "build": "node_modules/typescript/bin/tsc ",
+    "start:dev": "nodemon src/server.ts",
+    "start:prod": " src/server.ts",
+    "mongo:indices": "echo 'Coming soon!'",
     "debug": "nodemon src/server.ts --inspect",
     "lint": "eslint --ext .ts src",
     "test": "jest --coverage"
@@ -60,5 +62,9 @@
     "prettier": "^2.5.1",
     "supertest": "^6.2.2",
     "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": "18.18.2",
+    "npm": "9.8.1"
   }
 }
