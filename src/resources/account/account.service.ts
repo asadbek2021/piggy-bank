@@ -61,8 +61,8 @@ export async function getAccountsByUserId(req:Request, res:Response, next:NextFu
 export async function getAccountById(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
-    // @ts-ignore
-    const account = await Account.findById(id).cache({key: req.user?.id});
+    // const account = await Account.findById(id).cache({key: req.user?.id});
+    const account = await Account.findById(id);
     res.json(account);
   } catch (err) {
     next(err);

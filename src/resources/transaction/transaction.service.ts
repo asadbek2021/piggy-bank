@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
 import Transaction, { ITransaction } from './transaction.model';
-import { caching } from "../../tools";
-const client = caching.getClient();
 
 export async function getAllTransAccount(req:Request, res:Response, next:NextFunction) {
   try {
@@ -19,7 +17,8 @@ export async function getTransById(req:Request, res:Response, next:NextFunction)
   try {
     const { id } = req.params;
     // @ts-ignore
-    const transaction = await Transaction.findById(id).cache({key: req.user?.id});
+    // const transaction = await Transaction.findById(id).cache({key: req.user?.id});
+    const transaction = await Transaction.findById(id);
     res.json(transaction);
   } catch (err) {
     next(err);
@@ -34,6 +33,7 @@ export async function createTrans(req:Request, res:Response, next:NextFunction) 
     next(err);
   }
 }
+
 export async function updateTrans(req:Request, res:Response, next:NextFunction) {
   try {
     const { id } = req.params;
@@ -52,6 +52,4 @@ export async function deleteTrans(req:Request, res:Response, next:NextFunction) 
   } catch (err) {
     next(err);
   }
-}
-
-;
+};

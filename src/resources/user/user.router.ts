@@ -10,15 +10,15 @@ import {
     getUsers, 
     createUser
 } from './user.service';
-import { cleanCache } from '../../middlewares/cleanCacheMiddleware';
+// import { cleanCache } from '../../middlewares/cleanCacheMiddleware';
 
 router.get('/', addGuard, getUsers);
 
 router.get('/:id', getUserById);
 
-router.put('/:id', cleanCache, updateUser);
-router.post('/', cleanCache, createUser);
-
-router.delete('/:id', cleanCache, deleteUser);
+// router.put('/:id', cleanCache, updateUser);
+router.put('/:id', updateUser);
+router.post('/', createUser);
+router.delete('/:id', deleteUser);
 
 export default router;

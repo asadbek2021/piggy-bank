@@ -58,8 +58,8 @@ const transactionSchema = new Schema<ITransaction,TransactionModel>({
 
 
 transactionSchema.statics.findByAccountId = function findByAccountId(accountId:string, userId?: string) {
-  //@ts-ignore
-  return this.where({ accountId }).cache({key: userId}).exec();
+  // return this.where({ accountId }).cache({key: userId}).exec();
+  return this.where({ accountId }).exec();
 };
 
 export default model<ITransaction, TransactionModel>('Transaction', transactionSchema);
