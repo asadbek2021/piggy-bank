@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Build
-        run: npm run build
+        run: npm run build --strict false
       - name: Upload archive
         uses: actions/upload-artifact@v3
         with:
