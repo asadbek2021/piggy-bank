@@ -9,6 +9,7 @@ export async function registerUser(req: Request, res: Response, next: NextFuncti
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      //@ts-ignore
       throw new HttpError('Validation error: ', 403, errors);
     }
     const { email, password, role, firstname, lastname, gender, birthday, residence } = req.body;
@@ -36,6 +37,7 @@ export async function loginUser(req: Request, res: Response, next: NextFunction)
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      //@ts-ignore
       throw new HttpError('Invalid credentials!', 403, errors);
     }
     const { email, password } = req.body;
