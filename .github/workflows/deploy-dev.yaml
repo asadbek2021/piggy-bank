@@ -25,21 +25,22 @@ jobs:
       - name: Upload archive
         uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: build
-      - run: mkdir ./distfiles
+          name: piggy-bank-back
+          path: | 
+            build
+            node_modules
       - run: ls -R
       - uses: actions/download-artifact@v2
         with:
-          name: build
-          path: distfiles
+          name: piggy-bank-back
+          path: .
       - name: Deploy dive preview
         uses: appleboy/scp-action@master
         with: 
           host: ${{secrets.SSH_HOST}}
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
-          source: distfiles/*
+          source: piggy-bank-back/*
           target: "/server/"
       - name: Run node app
         uses: appleboy/ssh-action@master
@@ -47,7 +48,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          script: cd /server/distfiles && node ./server.js
+          script: cd /server/piggy-bank-back && node -r dontenv/config ./server.js dotenv_config_path=../.env 
             
 
           
