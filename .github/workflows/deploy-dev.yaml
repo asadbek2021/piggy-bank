@@ -34,8 +34,6 @@ jobs:
         with:
           name: archive.tar
           path: ./
-      - name: Unarchive
-        run: tar -xvf archive.tar -C ./
       - name: Deploy dive preview
         uses: appleboy/scp-action@master
         with: 
@@ -53,7 +51,7 @@ jobs:
           script: |
             cd /server
             mkdir piggy-bank-front
-            tar tar -xvf archive.tar -C ./piggy-bank-front
+            tar -xvf archive.tar -C ./piggy-bank-front
             cp .env /piggy-bank-front/build/
             node ./piggy-bank-front/build/server.js 
             
