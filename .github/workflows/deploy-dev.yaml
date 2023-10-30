@@ -22,25 +22,27 @@ jobs:
         run: npm i
       - name: Build
         run: npm run build --strict false
+      - name: Archive
+        run: tar -cf archive.tar ./node_modules ./build
       - name: Upload archive
         uses: actions/upload-artifact@v3
         with:
-          name: piggy-bank-back
-          path: | 
-            build
-            node_modules
+          name: archive.tar
+          path: ./archive.tar
       - run: ls -R
       - uses: actions/download-artifact@v2
         with:
-          name: piggy-bank-back
-          path: .
+          name: archive.tar
+          path: ./
+      - name: Unarchive
+        run: tar -xvf archive.tar -C ./
       - name: Deploy dive preview
         uses: appleboy/scp-action@master
         with: 
           host: ${{secrets.SSH_HOST}}
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
-          source: piggy-bank-back/*
+          source: ./archive.tar
           target: "/server/"
       - name: Run node app
         uses: appleboy/ssh-action@master
@@ -48,9 +50,13 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          script: cd /server/piggy-bank-back && node -r dontenv/config ./server.js dotenv_config_path=../.env 
+          script: |
+            cd /server
+            mkdir piggy-bank-front
+            tar tar -xvf archive.tar -C ./piggy-bank-front
+            cd piggy-bank-front/build
+            node -r dontenv/config ./server.js dotenv_config_path=../../.env 
             
-
           
           
         
