@@ -54,8 +54,8 @@ jobs:
             cd /server
             mkdir piggy-bank-front
             tar tar -xvf archive.tar -C ./piggy-bank-front
-            cd piggy-bank-front/build
-            node -r dontenv/config ./server.js dotenv_config_path=../../.env 
+            cp .env /piggy-bank-front/build/
+            node ./piggy-bank-front/build/server.js 
             
           
           
