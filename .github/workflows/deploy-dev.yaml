@@ -41,13 +41,13 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           source: distfiles/*
           target: "/server/"
-      - name: Run
+      - name: Run node app
         uses: appleboy/ssh-action@master
         with: 
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          script: cd /server/build && node ./server.js
+          script: cd /server/distfiles && node ./server.js
             
 
           
