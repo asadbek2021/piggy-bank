@@ -52,7 +52,8 @@ jobs:
             cd /server
             mkdir piggy-bank-front
             tar -xvf archive.tar -C ./piggy-bank-front
-            cp .env /piggy-bank-front/build/
+            rm archive.tar
+            cp .env piggy-bank-front/build/.env
             node ./piggy-bank-front/build/server.js 
             
           
