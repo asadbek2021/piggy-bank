@@ -58,8 +58,8 @@ jobs:
             mkdir "${DIR}"
             tar -xf "archive.tar" -C "${DIR}"
             rm "archive.tar"
+            npm i -g pm2
             pm2 --cwd "/server/${DIR}" startOrRestart "${DIR}/piggy-bank.app.json"
-          
           
         
 
