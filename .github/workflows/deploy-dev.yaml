@@ -50,11 +50,16 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /server
-            mkdir piggy-bank-front
-            tar -xvf archive.tar -C ./piggy-bank-front
+            DIR="piggy-bank-back"
+            if [ -d "$DIR" ]; then
+              echo "Remove old ${DIR} "
+              rm -rf "${DIR}"
+            fi
+            mkdir "${DIR}"
+            tar -xvf archive.tar -C "${DIR}"
             rm archive.tar
-            cp .env piggy-bank-front/build/.env
-            node ./piggy-bank-front/build/server.js 
+            cp .env "${DIR}/build/" .env
+            node "${DIR}/build/server.js" 
             
           
           
