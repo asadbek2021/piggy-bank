@@ -42,7 +42,7 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           source: ./archive.tar
           target: "/server/"
-      - name: Run node app
+      - name: Deploy to server
         uses: appleboy/ssh-action@master
         with: 
           host: ${{ secrets.SSH_HOST }}
@@ -58,9 +58,13 @@ jobs:
             mkdir "${DIR}"
             tar -xf "archive.tar" -C "${DIR}"
             rm "archive.tar"
-            npm i -g pm2
-            pm2 --cwd "/server/${DIR}" startOrRestart "${DIR}/piggy-bank.app.json"
           
-        
+      - name: Run node app
+        uses: appleboy/ssh-action@master
+        with: 
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: pm2 --cwd "/server/${DIR}" startOrRestart "${DIR}/piggy-bank.app.json"
 
         
