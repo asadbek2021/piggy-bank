@@ -56,9 +56,9 @@ jobs:
               rm -rf "${DIR}"
             fi
             mkdir "${DIR}"
-            tar -xvf archive.tar -C "${DIR}"
+            tar -xf archive.tar -C "${DIR}"
             rm archive.tar
-            cp .env "${DIR}/build/" .env
+            cp .env "${DIR}/build/" 
             node "${DIR}/build/server.js" 
             
           
