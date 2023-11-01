@@ -23,7 +23,7 @@ jobs:
       - name: Build
         run: npm run build --strict false
       - name: Archive
-        run: tar -cf archive.tar ./node_modules ./build
+        run: tar -cf archive.tar ./node_modules ./build ./piggy-bank.app.json
       - name: Upload archive
         uses: actions/upload-artifact@v3
         with:
@@ -58,7 +58,7 @@ jobs:
             mkdir "${DIR}"
             tar -xf "archive.tar" -C "${DIR}"
             rm "archive.tar"
-            node "${DIR}/build/server.js" 
+            pm2 --cwd "/server/${DIR}" startOrRestart "${DIR}/piggy-bank.app.json"
           
           
         
