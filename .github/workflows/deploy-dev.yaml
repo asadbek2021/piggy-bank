@@ -48,17 +48,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          script: |
-            cd /server
-            DIR="piggy-bank-back"
-            if [ -d "$DIR" ]; then
-              echo "Remove old ${DIR}"
-              rm -rf "${DIR}"
-            fi
-            mkdir "${DIR}"
-            tar -xf archive.tar -C "${DIR}"
-            rm archive.tar
-            node "${DIR}/build/server.js" 
+          script: echo "Good"
           
           
         
