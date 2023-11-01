@@ -52,15 +52,13 @@ jobs:
             cd /server
             DIR="piggy-bank-back"
             if [ -d "$DIR" ]; then
-              echo "Remove old ${DIR} "
+              echo "Remove old ${DIR}"
               rm -rf "${DIR}"
             fi
             mkdir "${DIR}"
             tar -xf archive.tar -C "${DIR}"
             rm archive.tar
-            cp .env "${DIR}/build/" 
             node "${DIR}/build/server.js" 
-            
           
           
         
