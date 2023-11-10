@@ -64,6 +64,8 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          script: pm2 --cwd "/server/${DIR}" startOrRestart "${DIR}/piggy-bank.app.json"
+          script: |
+              cd /server
+              ~/.npm-global/lib/node_modules/pm2/bin/pm2 startOrRestart "piggy-bank-back/piggy-bank.app.json"
 
         
