@@ -54,7 +54,7 @@ export async function loginUser(req: Request, res: Response, next: NextFunction)
         expiresIn: config.JWT_EXPIRES_IN,
       });
     } else {
-      throw new HttpError('Invalid credentials!', 404);
+      throw new HttpError('Invalid credentials!', 403);
     }
   } catch (err) {
     next(err);
