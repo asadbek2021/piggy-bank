@@ -41,7 +41,7 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           username: ${{secrets.SSH_USERNAME}}
           source: ./archive.tar
-          target: "/server/"
+          target: "/server/temp"
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         with: 
@@ -49,15 +49,15 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /server
-            DIR="piggy-bank-back"
+            cd /server/temp
+            DIR="/server/piggy-bank-back"
             if [ -d "$DIR" ]; then
               echo "Remove old ${DIR}"
               rm -rf "${DIR}";
             fi
             mkdir "${DIR}"
-            tar -xf "archive.tar" -C "${DIR}"
-            rm "archive.tar"
+            tar -xf "/server/temp/archive.tar" -C "${DIR}"
+            rm "/server/temp/archive.tar"
           
       - name: Run node app
         uses: appleboy/ssh-action@master
